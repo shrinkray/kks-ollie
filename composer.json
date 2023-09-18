@@ -1,0 +1,12 @@
+{
+    "name": "gregor/kks-ollie",
+    "description": "Modifier theme for OllieWP",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Greg Miller",
+            "email": "hello@gregmiller.io"
+        }
+    ],
+    "require": {}
+}
