@@ -2,11 +2,36 @@
     "name": "gregor/kks-ollie",
     "description": "Modifier theme for OllieWP",
     "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Gregor\\KksOllie\\": ["assets/", "functions.php"]
+        }
+    },
     "authors": [
         {
             "name": "Greg Miller",
             "email": "hello@gregmiller.io"
         }
     ],
-    "require": {}
+    "require": {
+		"php": ">=5.6"
+	},
+	"require-dev": {
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+		"wptrt/wpthemereview": "^0.2.1",
+		"php-parallel-lint/php-parallel-lint": "^1.3",
+		"wp-coding-standards/wpcs": "^2.3",
+		"phpcompatibility/phpcompatibility-wp": "^2.1"
+	},
+	"scripts": {
+		"lint": "@php ./vendor/bin/parallel-lint --exclude .git --exclude vendor .",
+		"wpcs:scan": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs --ignore=*/vendor/* --standard=WordPress-Extra .",		
+		"wpcs:fix": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcbf --ignore=*/vendor/* --standard=WordPress-Extra ."
+		
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	}
 }
