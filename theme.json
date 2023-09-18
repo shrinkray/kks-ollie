@@ -1,4 +1,53 @@
 {
 	"version": 2,
-	"$schema": "https://schemas.wp.org/wp/6.2/theme.json"
+	"$schema": "https://schemas.wp.org/wp/6.2/theme.json",
+		"settings": {
+		"appearanceTools": true,
+		"custom": {
+			
+		"typography": {
+				"fontFamilies": [
+					{
+						"fontFamily": "'Montserrat', sans-serif",
+						"name": "Montserrat",
+						"slug": "primary",
+						"fontFace": [
+							{
+								"fontDisplay": "block",
+								"fontFamily": "Montserrat",
+								"fontStretch": "normal",
+								"fontStyle": "normal",
+								"fontWeight": "100 300 700",
+								"src": [
+									"file:.\/assets\/fonts\/Montserrat-VariableFont_wght.woff2"
+								]
+							}
+						]
+					},
+					{
+						"fontFamily": "Inter, sans-serif",
+						"name": "Inter",
+						"slug": "primary",
+						"fontFace": [
+							{
+								"fontDisplay": "block",
+								"fontFamily": "Inter",
+								"fontStretch": "normal",
+								"fontStyle": "normal",
+								"fontWeight": "100 700",
+								"src": [
+									"file:.\/assets\/fonts\/Inter-VariableFont_slnt,wght.woff2"
+								]
+							}
+						]
+					},
+					{
+						"fontFamily": "monospace",
+						"name": "Monospace",
+						"slug": "monospace"
+					}
+				]
+			}
+		}
+	}
 }
