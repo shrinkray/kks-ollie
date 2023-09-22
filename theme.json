@@ -1,6 +1,30 @@
 {
 	"version": 2,
 	"$schema": "https://schemas.wp.org/wp/6.2/theme.json",
+	"customTemplates": [
+		{
+			"name": "page-no-title",
+			"title": "Page (No Title)",
+			"postTypes": [
+				"page"
+			]
+		},
+		{
+			"name": "page-with-sidebar",
+			"title": "Page (With Sidebar)",
+			"postTypes": [
+				"post",
+				"page"
+			]
+		},
+		{
+			"name": "single-wide-featured-image",
+			"title": "Single (Wide Featured Image)",
+			"postTypes": [
+				"post"
+			]
+		}
+	],
 	"settings": {
 	"appearanceTools": true,
 	"custom": {
