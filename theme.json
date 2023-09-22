@@ -1,53 +1,126 @@
 {
 	"version": 2,
 	"$schema": "https://schemas.wp.org/wp/6.2/theme.json",
-		"settings": {
-		"appearanceTools": true,
-		"custom": {
-			
-		"typography": {
-				"fontFamilies": [
-					{
-						"fontFamily": "'Montserrat', sans-serif",
-						"name": "Montserrat",
-						"slug": "primary",
-						"fontFace": [
-							{
-								"fontDisplay": "block",
-								"fontFamily": "Montserrat",
-								"fontStretch": "normal",
-								"fontStyle": "normal",
-								"fontWeight": "100 300 700",
-								"src": [
-									"file:.\/assets\/fonts\/Montserrat-VariableFont_wght.woff2"
-								]
-							}
-						]
-					},
-					{
-						"fontFamily": "Inter, sans-serif",
-						"name": "Inter",
-						"slug": "primary",
-						"fontFace": [
-							{
-								"fontDisplay": "block",
-								"fontFamily": "Inter",
-								"fontStretch": "normal",
-								"fontStyle": "normal",
-								"fontWeight": "100 700",
-								"src": [
-									"file:.\/assets\/fonts\/Inter-VariableFont_slnt,wght.woff2"
-								]
-							}
-						]
-					},
-					{
-						"fontFamily": "monospace",
-						"name": "Monospace",
-						"slug": "monospace"
-					}
-				]
+	"settings": {
+	"appearanceTools": true,
+	"custom": {
+		"fontWeight": {
+			"thin": 100,
+			"extra-light": 200,
+			"light": 300,
+			"regular": 400,
+			"medium": 500,
+			"semi-bold": 600,
+			"bold": 700,
+			"extra-bold": 800,
+			"black": 900
+		},
+		"lineHeight": {
+			"none": 1,
+			"tight": 1.1,
+			"snug": 1.2,
+			"normal": 1.5,
+			"relaxed": 1.625,
+			"loose": 2,
+			"body": "calc(1px + 2ex + 7px)"
+		}
+	},
+	"layout": {
+		"contentSize": "740px",
+		"wideSize": "1260px"
+	},
+	"spacing": {
+		"spacingSizes": [
+			{
+				"name": "Small",
+				"size": "clamp(.5rem, 2.5vw, 1rem)",
+				"slug": "small"
+			},
+			{
+				"name": "Medium",
+				"size": "clamp(1.5rem, 4vw, 2rem)",
+				"slug": "medium"
+			},
+			{
+				"name": "Large",
+				"size": "clamp(2rem, 5vw, 3rem)",
+				"slug": "large"
+			},
+			{
+				"name": "Extra Large",
+				"size": "clamp(3rem, 7vw, 5rem)",
+				"slug": "x-large"
+			},
+			{
+				"name": "2xl",
+				"size": "clamp(4rem, 9vw, 7rem)",
+				"slug": "xx-large"
+			},
+			{
+				"name": "3xl",
+				"size": "clamp(5rem, 12vw, 9rem)",
+				"slug": "xxx-large"
+			},
+			{
+				"name": "4xl",
+				"size": "clamp(6rem, 14vw, 13rem)",
+				"slug": "xxxx-large"
 			}
+		],
+		"units": [
+			"px",
+			"em",
+			"rem",
+			"vh",
+			"vw",
+			"%"
+		],
+		"blockGap": true,
+		"padding": true,
+		"margin": true
+	},
+	"typography": {
+			"fontFamilies": [
+				{
+					"fontFamily": "'Montserrat', sans-serif",
+					"name": "Montserrat",
+					"slug": "primary",
+					"fontFace": [
+						{
+							"fontDisplay": "block",
+							"fontFamily": "Montserrat",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "100 300 700",
+							"src": [
+								"file:.\/assets\/fonts\/Montserrat-VariableFont_wght.woff2"
+							]
+						}
+					]
+				},
+				{
+					"fontFamily": "Inter, sans-serif",
+					"name": "Inter",
+					"slug": "primary",
+					"fontFace": [
+						{
+							"fontDisplay": "block",
+							"fontFamily": "Inter",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "100 700",
+							"src": [
+								"file:.\/assets\/fonts\/Inter-VariableFont_slnt,wght.woff2"
+							]
+						}
+					]
+				},
+				{
+					"fontFamily": "monospace",
+					"name": "Monospace",
+					"slug": "monospace"
+				}
+			]
 		}
 	}
 }
