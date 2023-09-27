@@ -123,23 +123,6 @@
 					]
 				},
 				{
-					"fontFamily": "Inter, sans-serif",
-					"name": "Inter",
-					"slug": "primary",
-					"fontFace": [
-						{
-							"fontDisplay": "block",
-							"fontFamily": "Inter",
-							"fontStretch": "normal",
-							"fontStyle": "normal",
-							"fontWeight": "100 700",
-							"src": [
-								"file:.\/assets\/fonts\/Inter-VariableFont_slnt,wght.woff2"
-							]
-						}
-					]
-				},
-				{
 					"fontFamily": "monospace",
 					"name": "Monospace",
 					"slug": "monospace"
