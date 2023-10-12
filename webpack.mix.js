@@ -7,4 +7,4 @@ const mix = require('laravel-mix');
 
 mix
    // .disableNotifications()
-    .sass('scss/main.scss', 'dist');
+    .sass('scss/kks.scss', 'dist');
