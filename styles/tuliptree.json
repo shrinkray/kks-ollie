@@ -1,0 +1,46 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 2,
+	"title": "Tuliptree",
+	"settings": {
+		"color": {
+			"palette": [
+				{
+					"name": "Primary",
+					"slug": "primary",
+					"color": "#945114"
+				},
+				{
+					"name": "Main",
+					"slug": "main",
+					"color": "#14111f"
+				},
+				{
+					"name": "Secondary",
+					"slug": "secondary",
+					"color": "#f4de94"
+				},
+				{
+					"name": "Main Accent",
+					"slug": "main-accent",
+					"color": "#d0ccde"
+				},
+				{
+					"name": "Primary Accent",
+					"slug": "primary-accent",
+					"color": "#f9f2c8"
+				},
+				{
+					"name": "Tertiary",
+					"slug": "tertiary",
+					"color": "#fcf9ea"
+				},
+				{
+					"name": "Base",
+					"slug": "base",
+					"color": "#fff"
+				}
+			]
+		}
+	}
+}
