@@ -19,7 +19,7 @@
     "autoprefixer": "^10.4.16",
     "laravel-mix": "^6.0.49",
     "laravel-mix-purgecss": "^6.0.0",
-    "postcss": "^8.4.30",
+    "postcss": "^8.4.31",
     "postcss-cli": "^10.1.0",
     "postcss-custom-properties": "^13.3.2",
     "postcss-import": "^15.1.0",
