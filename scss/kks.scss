@@ -48,11 +48,25 @@ nav {
 
 .wp-block-navigation a:where(:not(.wp-element-button)) {
     text-underline-offset: 0.3rem;
-    text-decoration: underline;
+    -webkit-text-decoration: underline dotted;
+            text-decoration: underline dotted;
     font-weight: 400;
 
     &:hover {
         text-underline-offset: 0.3rem;
+    }
+}
+
+a {
+    -webkit-text-decoration: underline dotted;
+        text-decoration: underline dotted;
+        -webkit-text-decoration-color: var(--wp--preset--color--main);
+        text-decoration-color: var(--wp--preset--color--main);
+    &:hover, &:focus {
+        -webkit-text-decoration: underline dotted;
+                text-decoration: underline dotted;
+        -webkit-text-decoration-color: var(--wp--preset--color--main);
+                text-decoration-color: var(--wp--preset--color--main);
     }
 }
 
@@ -64,6 +78,8 @@ a:where(:not(.wp-element-button)) {
         font-size: var(--wp--preset--font-size--small);
         font-weight: bold;
         white-space: nowrap;
+        -webkit-text-decoration: underline dotted;
+                text-decoration: underline dotted;
 
         &:hover {
             color: var(--wp--preset--color--main);
