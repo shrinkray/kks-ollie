@@ -96,3 +96,12 @@ a:where(:not(.wp-element-button)) {
         padding-bottom: 0.8rem;
     }
 }
+
+.wp-block-image {
+    figcaption {
+        font-size: var(--wp--preset--font-size--small);
+        color: var(--wp--preset--color--primary);
+        font-weight: var(--wp--custom--font-weight--normal);
+        line-height: var(--wp--custom--line-height--tight);
+    }
+}

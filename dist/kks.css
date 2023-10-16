@@ -83,3 +83,10 @@ a:where(:not(.wp-element-button)):where(.product-btn, .resourse-btn):hover {
   padding-top: 0.4rem;
   padding-bottom: 0.8rem;
 }
+
+.wp-block-image figcaption {
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--primary);
+  font-weight: var(--wp--custom--font-weight--normal);
+  line-height: var(--wp--custom--line-height--tight);
+}
