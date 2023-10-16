@@ -21,7 +21,8 @@
 			"name": "single-wide-featured-image",
 			"title": "Single (Wide Featured Image)",
 			"postTypes": [
-				"post"
+				"post",
+				"page"
 			]
 		}
 	],
