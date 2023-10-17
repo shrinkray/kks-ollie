@@ -121,3 +121,11 @@ a:where(:not(.wp-element-button)) {
         line-height: var(--wp--custom--line-height--tight);
     }
 }
+
+.superblockslider__slide_inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+
+}
