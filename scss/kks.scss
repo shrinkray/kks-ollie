@@ -171,6 +171,12 @@ a:where(:not(.wp-element-button)) {
 @media screen and (max-width: 600px) {
     .gw-mm {
         &.is-mobile {
+            &:not(.is-opened) {
+                width: 100vw;
+            }
+        }
+
+        &.is-mobile {
             &.is-opened {
                 .gw-mm__content-wrapper {
                     position: initial;
@@ -190,4 +196,11 @@ a:where(:not(.wp-element-button)) {
             justify-content: flex-end;
         }
     }
+    .wp-container-24 {
+        box-shadow: none;
+    }
+}
+
+.wp-container-24 {
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.08);
 }
