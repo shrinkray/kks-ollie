@@ -30,11 +30,15 @@
 
 .gw-mm-item {
     &__link a {
+        color: var(--wp--preset--color--primary);
         text-underline-offset: 0.3rem;
         &:hover,
         &:focus {
+            text-underline-offset: 0.3rem;
             -webkit-text-decoration: underline solid;
             text-decoration: underline solid;
+            -webkit-text-decoration-color: var(--wp--preset--color--primary);
+            text-decoration-color: var(--wp--preset--color--primary);
         }
     }
 
@@ -50,10 +54,16 @@
     &__dropdown-content {
         a {
             text-underline-offset: 0.3rem;
+            color: var(--wp--preset--color--primary);
             &:hover,
             &:focus {
+                text-underline-offset: 0.3rem;
                 -webkit-text-decoration: underline solid;
                 text-decoration: underline solid;
+                -webkit-text-decoration-color: var(
+                    --wp--preset--color--primary
+                );
+                text-decoration-color: var(--wp--preset--color--primary);
             }
         }
     }
@@ -78,25 +88,32 @@ nav {
     &:hover,
     &:focus {
         text-underline-offset: 0.3rem;
+        -webkit-text-decoration: underline solid;
+        text-decoration: underline solid;
+        -webkit-text-decoration-color: var(--wp--preset--color--primary);
+        text-decoration-color: var(--wp--preset--color--primary);
     }
 }
 
 a {
+    color: var(--wp--preset--color--primary);
     -webkit-text-decoration: underline dotted;
     text-decoration: underline dotted;
-    -webkit-text-decoration-color: var(--wp--preset--color--main);
-    text-decoration-color: var(--wp--preset--color--main);
+    -webkit-text-decoration-color: var(--wp--preset--color--primary);
+    text-decoration-color: var(--wp--preset--color--primary);
     &:hover,
     &:focus {
-        -webkit-text-decoration: underline dotted;
-        text-decoration: underline dotted;
-        -webkit-text-decoration-color: var(--wp--preset--color--main);
-        text-decoration-color: var(--wp--preset--color--main);
+        text-underline-offset: 0.3rem;
+        -webkit-text-decoration: underline solid;
+        text-decoration: underline solid;
+        -webkit-text-decoration-color: var(--wp--preset--color--primary);
+        text-decoration-color: var(--wp--preset--color--primary);
     }
 }
 
 a:where(:not(.wp-element-button)) {
     text-underline-offset: 0.3rem;
+    color: var(--wp--preset--color--primary);
     &:where(.product-btn, .resourse-btn) {
         color: var(--wp--preset--color--primary);
         border-radius: 0.4rem;
@@ -106,8 +123,10 @@ a:where(:not(.wp-element-button)) {
         -webkit-text-decoration: underline dotted;
         text-decoration: underline dotted;
 
-        &:hover {
-            color: var(--wp--preset--color--main);
+        &:hover,
+        &:focus {
+            -webkit-text-decoration: underline solid;
+            text-decoration: underline solid;
         }
     }
 }
@@ -140,10 +159,12 @@ a:where(:not(.wp-element-button)) {
     }
 }
 
+// set main color for image caption
+div[class*='wp-block-'],
 .wp-block-image {
     figcaption {
-        font-size: var(--wp--preset--font-size--small);
-        color: var(--wp--preset--color--primary);
+        font-size: var(--wp--preset--font-size--x-small);
+        color: var(--wp--preset--color--black);
         font-weight: var(--wp--custom--font-weight--normal);
         line-height: var(--wp--custom--line-height--tight);
     }
@@ -201,6 +222,7 @@ a:where(:not(.wp-element-button)) {
     }
 }
 
+// div containing navigation
 .wp-container-24 {
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.08);
 }
