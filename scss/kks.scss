@@ -167,3 +167,27 @@ a:where(:not(.wp-element-button)) {
 .dashicons-calendar-alt {
     margin-top: 3px;
 }
+
+@media screen and (max-width: 600px) {
+    .gw-mm {
+        &.is-mobile {
+            &.is-opened {
+                .gw-mm__content-wrapper {
+                    position: initial;
+                    max-width: 90vw;
+                }
+            }
+        }
+    }
+    .wp-site-blocks {
+        .is-position-sticky {
+            position: inherit !important;
+        }
+    }
+    .wp-block-getwid-megamenu {
+        .gw-mm__toggle-wrapper {
+            display: flex !important;
+            justify-content: flex-end;
+        }
+    }
+}
