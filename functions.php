@@ -20,3 +20,11 @@ function kks_enqueue_styles() {
 		wp_get_theme()->get( 'Version' ) // This only works if you have Version defined in the style header.
 	);
 }
+
+// Remove title support from images
+
+add_filter( 'wp_get_attachment_image_attributes', 'remove_image_title_text' );
+function remove_image_title_text( $attr ) {
+	unset( $attr['title']) ;
+	return $attr;
+}
