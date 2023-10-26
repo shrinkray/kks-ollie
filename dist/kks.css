@@ -21,12 +21,28 @@
   background-color: oklab(0.99 0 0.03);
 }
 
+.gw-mm-item__link a {
+  text-underline-offset: 0.3rem;
+}
+.gw-mm-item__link a:hover, .gw-mm-item__link a:focus {
+  -webkit-text-decoration: underline solid;
+  text-decoration: underline solid;
+}
 .gw-mm-item__dropdown {
   background-color: oklab(0.99 0 0.03);
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.08);
+  border-bottom-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
 }
 .gw-mm-item__dropdown .wp-block-column {
   background-color: transparent;
+}
+.gw-mm-item__dropdown-content a {
+  text-underline-offset: 0.3rem;
+}
+.gw-mm-item__dropdown-content a:hover, .gw-mm-item__dropdown-content a:focus {
+  -webkit-text-decoration: underline solid;
+  text-decoration: underline solid;
 }
 
 .no-margin {
@@ -43,7 +59,7 @@ nav .no-background {
   text-decoration: underline dotted;
   font-weight: 400;
 }
-.wp-block-navigation a:where(:not(.wp-element-button)):hover {
+.wp-block-navigation a:where(:not(.wp-element-button)):hover, .wp-block-navigation a:where(:not(.wp-element-button)):focus {
   text-underline-offset: 0.3rem;
 }
 
@@ -93,7 +109,8 @@ a:where(:not(.wp-element-button)):where(.product-btn, .resourse-btn):hover {
 .posts-data-table .col-description {
   font-size: var(--wp--preset--font-size--small);
 }
-.posts-data-table .odd, .posts-data-table .even {
+.posts-data-table .odd,
+.posts-data-table .even {
   padding-top: 0.4rem;
   padding-bottom: 0.8rem;
 }
@@ -103,4 +120,32 @@ a:where(:not(.wp-element-button)):where(.product-btn, .resourse-btn):hover {
   color: var(--wp--preset--color--primary);
   font-weight: var(--wp--custom--font-weight--normal);
   line-height: var(--wp--custom--line-height--tight);
+}
+
+.superblockslider__slide_inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wp-block-getwid-megamenu-item .dashicons-arrow-down-alt2 {
+  vertical-align: middle;
+}
+
+.dashicons-calendar-alt {
+  margin-top: 3px;
+}
+
+@media screen and (max-width: 600px) {
+  .gw-mm.is-mobile.is-opened .gw-mm__content-wrapper {
+    position: initial;
+    max-width: 90vw;
+  }
+  .wp-site-blocks .is-position-sticky {
+    position: inherit !important;
+  }
+  .wp-block-getwid-megamenu .gw-mm__toggle-wrapper {
+    display: flex !important;
+    justify-content: flex-end;
+  }
 }

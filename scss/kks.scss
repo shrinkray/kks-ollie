@@ -22,17 +22,40 @@
     &.is-mobile {
         &.is-opened {
             .gw-mm__content-wrapper {
-                background-color: oklab(0.99 -0.0 0.03);
+                background-color: oklab(0.99 -0 0.03);
             }
         }
     }
 }
 
-.gw-mm-item__dropdown {
-    background-color: oklab(0.99 -0.0 0.03);
-        box-shadow: 0 5px 5px 0 rgba(0,0,0,0.08);
-    .wp-block-column {
-        background-color: transparent;
+.gw-mm-item {
+    &__link a {
+        text-underline-offset: 0.3rem;
+        &:hover,
+        &:focus {
+            -webkit-text-decoration: underline solid;
+            text-decoration: underline solid;
+        }
+    }
+
+    &__dropdown {
+        background-color: oklab(0.99 -0 0.03);
+        box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.08);
+        border-bottom-right-radius: 1rem;
+        border-bottom-left-radius: 1rem;
+        .wp-block-column {
+            background-color: transparent;
+        }
+    }
+    &__dropdown-content {
+        a {
+            text-underline-offset: 0.3rem;
+            &:hover,
+            &:focus {
+                -webkit-text-decoration: underline solid;
+                text-decoration: underline solid;
+            }
+        }
     }
 }
 
@@ -49,37 +72,39 @@ nav {
 .wp-block-navigation a:where(:not(.wp-element-button)) {
     text-underline-offset: 0.3rem;
     -webkit-text-decoration: underline dotted;
-            text-decoration: underline dotted;
+    text-decoration: underline dotted;
     font-weight: 400;
 
-    &:hover {
+    &:hover,
+    &:focus {
         text-underline-offset: 0.3rem;
     }
 }
 
 a {
     -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+    -webkit-text-decoration-color: var(--wp--preset--color--main);
+    text-decoration-color: var(--wp--preset--color--main);
+    &:hover,
+    &:focus {
+        -webkit-text-decoration: underline dotted;
         text-decoration: underline dotted;
         -webkit-text-decoration-color: var(--wp--preset--color--main);
         text-decoration-color: var(--wp--preset--color--main);
-    &:hover, &:focus {
-        -webkit-text-decoration: underline dotted;
-                text-decoration: underline dotted;
-        -webkit-text-decoration-color: var(--wp--preset--color--main);
-                text-decoration-color: var(--wp--preset--color--main);
     }
 }
 
 a:where(:not(.wp-element-button)) {
     text-underline-offset: 0.3rem;
-    &:where( .product-btn, .resourse-btn ) {
+    &:where(.product-btn, .resourse-btn) {
         color: var(--wp--preset--color--primary);
         border-radius: 0.4rem;
         font-size: var(--wp--preset--font-size--small);
         font-weight: bold;
         white-space: nowrap;
         -webkit-text-decoration: underline dotted;
-                text-decoration: underline dotted;
+        text-decoration: underline dotted;
 
         &:hover {
             color: var(--wp--preset--color--main);
@@ -107,7 +132,9 @@ a:where(:not(.wp-element-button)) {
     }
     .col-description {
         font-size: var(--wp--preset--font-size--small);
-    }.odd, .even {
+    }
+    .odd,
+    .even {
         padding-top: 0.4rem;
         padding-bottom: 0.8rem;
     }
@@ -119,5 +146,48 @@ a:where(:not(.wp-element-button)) {
         color: var(--wp--preset--color--primary);
         font-weight: var(--wp--custom--font-weight--normal);
         line-height: var(--wp--custom--line-height--tight);
+    }
+}
+
+// use with testimonials
+.superblockslider__slide_inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// megamenu
+.wp-block-getwid-megamenu-item {
+    .dashicons-arrow-down-alt2 {
+        vertical-align: middle;
+    }
+}
+
+// use with locations where a date is set
+.dashicons-calendar-alt {
+    margin-top: 3px;
+}
+
+@media screen and (max-width: 600px) {
+    .gw-mm {
+        &.is-mobile {
+            &.is-opened {
+                .gw-mm__content-wrapper {
+                    position: initial;
+                    max-width: 90vw;
+                }
+            }
+        }
+    }
+    .wp-site-blocks {
+        .is-position-sticky {
+            position: inherit !important;
+        }
+    }
+    .wp-block-getwid-megamenu {
+        .gw-mm__toggle-wrapper {
+            display: flex !important;
+            justify-content: flex-end;
+        }
     }
 }
