@@ -20,6 +20,12 @@ function kks_enqueue_styles() {
 		wp_get_theme()->get( 'Version' ) // This only works if you have Version defined in the style header.
 	);
 }
+// Enqueue custom javascript and load last
+function kks_enqueue_scripts() {
+	wp_enqueue_script( 'kks-custom-js', get_stylesheet_directory_uri() . '/dist/kks.js', array(), wp_get_theme()->get( 'Version' ), true );
+}
+add_action( 'wp_enqueue_scripts', 'kks_enqueue_scripts', 999 );
+
 
 // Remove title support from images
 
