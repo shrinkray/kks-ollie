@@ -133,6 +133,9 @@ a:where(:not(.wp-element-button)) {
 .left-padding-1 {
     padding-left: 1rem;
 }
+.wp-block-group {
+    margin-top: 0;
+}
 
 .wp-site-blocks {
     min-height: 100vh;
