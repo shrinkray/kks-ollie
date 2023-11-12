@@ -14,6 +14,14 @@
 var siteHeader = document.querySelector('.site-header');
 siteHeader.classList.add('is-position-sticky');
 
+// Replace div element with .site--logo class as anchor element, keep all classes, and add href attribute and target self
+var siteLogo = document.querySelectorAll('.site--logo');
+var anchor = document.createElement('a');
+anchor.href = '/';
+anchor.classList = siteLogo.classList;
+anchor.target = '_self';
+siteLogo.parentNode.replaceChild(anchor, siteLogo);
+
 /***/ }),
 
 /***/ "./scss/kks.scss":
