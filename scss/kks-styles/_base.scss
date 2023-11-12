@@ -1,27 +1,55 @@
 @use 'variables' as *;
 
-.logo--container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    margin: 0;
-    aspect-ratio: 3/2;
-
-    .site--logo {
-        aspect-ratio: 3/2;
-        background-repeat: no-repeat;
-        background-position-y: bottom;
-        background-image: url('#{$logo}');
-        margin: 0 !important;
+.footer--content {
+    .logo--container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
         padding: 0;
-        width: 160px;
-        height: 107px;
+        margin: 0;
 
-        .site--title {
-            color: transparent;
-            position: absolute;
-            top: -800px;
+        .site--logo {
+            aspect-ratio: 3/2;
+            background-repeat: no-repeat;
+            background-position-y: bottom;
+            background-image: url('#{$footerLogo}');
+            margin: 0 !important;
+            padding: 0;
+            width: 250px;
+            height: 167px;
+
+            .site--title {
+                color: transparent;
+                position: absolute;
+                top: -800px;
+            }
+        }
+    }
+}
+.header--nav {
+    .logo--container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        margin: 0;
+        aspect-ratio: 3/2;
+
+        .site--logo {
+            aspect-ratio: 3/2;
+            background-repeat: no-repeat;
+            background-position-y: bottom;
+            background-image: url('#{$logo}');
+            margin: 0 !important;
+            padding: 0;
+            width: 160px;
+            height: 107px;
+
+            .site--title {
+                color: transparent;
+                position: absolute;
+                top: -800px;
+            }
         }
     }
 }
