@@ -5,10 +5,23 @@
 const siteHeader = document.querySelector('.site-header');
 siteHeader.classList.add('is-position-sticky');
 
-// Replace div element with .site--logo class as anchor element, keep all classes, and add href attribute and target self
-const siteLogo = document.querySelectorAll('.site--logo');
-const anchor = document.createElement('a');
-anchor.href = '/';
-anchor.classList = siteLogo.classList;
-anchor.target = '_self';
-siteLogo.parentNode.replaceChild(anchor, siteLogo);
+// Select all elements with .site--logo class
+const siteLogos = document.querySelectorAll('.site--logo');
+
+siteLogos.forEach(function (siteLogo) {
+    // Check if siteLogo actually has a parentNode
+    if (siteLogo.parentNode) {
+        // Create a new anchor element
+        const anchor = document.createElement('a');
+        anchor.href = '/';
+        anchor.target = '_self';
+
+        // Copy all classes from siteLogo to anchor
+        anchor.className = siteLogo.className;
+
+        // Replace siteLogo with the new anchor element
+        siteLogo.parentNode.replaceChild(anchor, siteLogo);
+    } else {
+        console.log('Parent node not found for:', siteLogo);
+    }
+});
