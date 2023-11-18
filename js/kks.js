@@ -36,3 +36,25 @@ siteLogos.forEach(function (siteLogo) {
         console.log('Parent node not found for:', siteLogo);
     }
 });
+
+// Select all instances of the div containing the anchor and button
+const divs = document.querySelectorAll('.gw-mm-item__link');
+
+// Loop through each div instance
+divs.forEach((div) => {
+    // Select the anchor and button within this specific div
+    const anchor = div.querySelector('a');
+    const button = div.querySelector('.gw-mm-item__toggle');
+
+    // Check if both elements exist
+    if (anchor && button) {
+        // Generate a unique ID for the anchor
+        const uniqueId = 'label-' + Math.random().toString(36).substr(2, 9);
+
+        // Set the ID attribute on the anchor
+        anchor.id = uniqueId;
+
+        // Set the aria-labelledby attribute on the button, referencing the anchor's ID
+        button.setAttribute('aria-labelledby', uniqueId);
+    }
+});
