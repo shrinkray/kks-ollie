@@ -34,3 +34,16 @@ function remove_image_title_text( $attr ) {
 	unset( $attr['title']) ;
 	return $attr;
 }
+
+/**
+ * This function modifies the main WordPress archive query for categories
+ * and tags to include an array of post types instead of the default 'post' post type.
+ *
+ * @param object $query The main WordPress query.
+ */
+function tg_include_custom_post_types_in_archive_pages( $query ) {
+    if ( $query->is_main_query() && ! is_admin() && ( is_category() || is_tag() && empty( $query->query_vars['suppress_filters'] ) ) ) {
+        $query->set( 'post_type', array( 'teachers', 'case-study' ) );
+    }
+}
+add_action( 'pre_get_posts', 'tg_include_custom_post_types_in_archive_pages' );
