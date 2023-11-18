@@ -5,7 +5,6 @@
 const siteHeader = document.querySelector('.site-header');
 siteHeader.classList.add('is-position-sticky');
 
-// Select all elements with .site--logo class
 const siteLogos = document.querySelectorAll('.site--logo');
 
 siteLogos.forEach(function (siteLogo) {
@@ -14,10 +13,22 @@ siteLogos.forEach(function (siteLogo) {
         // Create a new anchor element
         const anchor = document.createElement('a');
         anchor.href = '/';
-        anchor.target = '_self';
+        anchor.title = 'Kool Kat Science - Home';
 
         // Copy all classes from siteLogo to anchor
         anchor.className = siteLogo.className;
+
+        // Create a new span element
+        const span = document.createElement('span');
+
+        // Set the class name of the span to 'hidden'
+        span.className = 'visually-hidden';
+
+        // Add text to the span
+        span.textContent = 'Kool Kat Science'; // Replace with your desired text
+
+        // Append the span to the anchor
+        anchor.appendChild(span);
 
         // Replace siteLogo with the new anchor element
         siteLogo.parentNode.replaceChild(anchor, siteLogo);
