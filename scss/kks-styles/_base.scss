@@ -1,4 +1,5 @@
 @use 'variables' as *;
+@use 'units' as *;
 @use 'sass:color';
 
 .visually-hidden {
@@ -21,6 +22,8 @@
         text-decoration-color: var(--wp--preset--color--main);
     }
 }
+
+
 
 .wp-block-search__input {
     background-color: var(--wp--preset--color--tertiary);
