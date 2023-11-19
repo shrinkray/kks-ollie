@@ -8,7 +8,7 @@
 				{
 					"name": "Primary",
 					"slug": "primary",
-					"color": "#693a1a"
+					"color": "#693A1A"
 				},
 				{
 					"name": "Main",
@@ -18,12 +18,12 @@
 				{
 					"name": "Secondary",
 					"slug": "secondary",
-					"color": "##a82e5b"
+					"color": "#a82e5b"
 				},
 				{
 					"name": "Main Accent",
 					"slug": "main-accent",
-					"color": "##bbe9fc"
+					"color": "#bbe9fc"
 				},
 				{
 					"name": "Primary Accent",
