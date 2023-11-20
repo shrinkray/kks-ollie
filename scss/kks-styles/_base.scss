@@ -23,7 +23,9 @@
     }
 }
 
-
+.wp-block-cover:has(>.wp-block-cover__background) {
+        margin-top: 0;
+    }
 
 .wp-block-search__input {
     background-color: var(--wp--preset--color--tertiary);
