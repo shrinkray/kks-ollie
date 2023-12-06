@@ -459,3 +459,23 @@ div[class*='wp-block-'],
 .tribe-common-c-svgicon {
     color: var(--wp--preset--color--primary) !important;
 }
+
+.is-box-shadow {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.is-minus-2-deg {
+    transform: rotate(-2deg);
+}
+
+.is-minus-3-deg {
+    transform: rotate(-3deg);
+}
+
+.is-plus-2-deg {
+    transform: rotate(2deg);
+}
+
+.is-plus-3-deg {
+    transform: rotate(3deg);
+}
