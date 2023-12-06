@@ -479,3 +479,23 @@ div[class*='wp-block-'],
 .is-plus-3-deg {
     transform: rotate(3deg);
 }
+
+.is-hero-outline-button {
+    border: 0.1rem solid var(--wp--preset--color--tertiary);
+    border-radius: 0.4rem;
+    color: var(--wp--preset--color--tertiary);
+    font-weight: bold;
+    white-space: nowrap;
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+    text-underline-offset: 0.3rem;
+
+    &:hover,
+    &:focus {
+        background-color: var(--wp--preset--color--primary);
+        color: var(--wp--preset--color--tertiary);
+        -webkit-text-decoration: underline solid;
+        text-decoration: underline solid;
+        text-underline-offset: 0.3rem;
+    }
+}
