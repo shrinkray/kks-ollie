@@ -250,7 +250,7 @@ a:where(:not(.wp-element-button)) {
     .is-position-sticky {
         position: -webkit-sticky;
         position: sticky;
-        top: 0;
+        top: -80px;
         z-index: 1200;
     }
 }

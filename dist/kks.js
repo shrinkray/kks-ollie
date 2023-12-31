@@ -1,1 +1,272 @@
-(()=>{var e,t={885:()=>{function e(e){e.classList.contains("dashicons-arrow-down-alt2")||(e.classList.remove("dashicons-arrow-down"),e.classList.add("dashicons-arrow-down-alt2"))}document.querySelector(".site-header").classList.add("is-position-sticky"),document.querySelectorAll(".site--logo").forEach((function(e){if(e.parentNode){var t=document.createElement("a");t.href="/",t.title="Kool Kat Science - Home",t.className=e.className;var r=document.createElement("span");r.className="visually-hidden",r.textContent="Kool Kat Science",t.appendChild(r),e.parentNode.replaceChild(t,e)}else console.log("Parent node not found for:",e)})),document.querySelectorAll(".gw-mm-item__link").forEach((function(e){var t=e.querySelector("a"),r=e.querySelector(".gw-mm-item__toggle");if(t&&r){var o="label-"+Math.random().toString(36).substr(2,9);t.id=o,r.setAttribute("aria-labelledby",o)}}));var t=new MutationObserver((function(t){t.forEach((function(t){"attributes"===t.type&&"class"===t.attributeName&&e(t.target)}))})),r={attributes:!0,attributeFilter:["class"]};document.querySelectorAll(".dashicons").forEach((function(o){e(o),t.observe(o,r)}))},958:()=>{}},r={};function o(e){var a=r[e];if(void 0!==a)return a.exports;var n=r[e]={exports:{}};return t[e](n,n.exports,o),n.exports}o.m=t,e=[],o.O=(t,r,a,n)=>{if(!r){var l=1/0;for(u=0;u<e.length;u++){for(var[r,a,n]=e[u],s=!0,i=0;i<r.length;i++)(!1&n||l>=n)&&Object.keys(o.O).every((e=>o.O[e](r[i])))?r.splice(i--,1):(s=!1,n<l&&(l=n));if(s){e.splice(u--,1);var c=a();void 0!==c&&(t=c)}}return t}n=n||0;for(var u=e.length;u>0&&e[u-1][2]>n;u--)e[u]=e[u-1];e[u]=[r,a,n]},o.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t),(()=>{var e={67:0,134:0};o.O.j=t=>0===e[t];var t=(t,r)=>{var a,n,[l,s,i]=r,c=0;if(l.some((t=>0!==e[t]))){for(a in s)o.o(s,a)&&(o.m[a]=s[a]);if(i)var u=i(o)}for(t&&t(r);c<l.length;c++)n=l[c],o.o(e,n)&&e[n]&&e[n][0](),e[n]=0;return o.O(u)},r=self.webpackChunkkks_ollie=self.webpackChunkkks_ollie||[];r.forEach(t.bind(null,0)),r.push=t.bind(null,r.push.bind(r))})(),o.O(void 0,[134],(()=>o(885)));var a=o.O(void 0,[134],(()=>o(958)));a=o.O(a)})();
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./js/kks.js":
+/*!*******************!*\
+  !*** ./js/kks.js ***!
+  \*******************/
+/***/ (() => {
+
+/* Add sticky header class
+ * https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
+ * .is-position-sticky is disabled in mobile view
+ */
+var siteHeader = document.querySelector('.site-header');
+siteHeader.classList.add('is-position-sticky');
+var siteLogos = document.querySelectorAll('.site--logo');
+siteLogos.forEach(function (siteLogo) {
+  // Check if siteLogo actually has a parentNode
+  if (siteLogo.parentNode) {
+    // Create a new anchor element
+    var anchor = document.createElement('a');
+    anchor.href = '/';
+    anchor.title = 'Kool Kat Science - Home';
+
+    // Copy all classes from siteLogo to anchor
+    anchor.className = siteLogo.className;
+
+    // Create a new span element
+    var span = document.createElement('span');
+
+    // Set the class name of the span to 'hidden'
+    span.className = 'visually-hidden';
+
+    // Add text to the span
+    span.textContent = 'Kool Kat Science'; // Replace with your desired text
+
+    // Append the span to the anchor
+    anchor.appendChild(span);
+
+    // Replace siteLogo with the new anchor element
+    siteLogo.parentNode.replaceChild(anchor, siteLogo);
+  } else {
+    console.log('Parent node not found for:', siteLogo);
+  }
+});
+
+/**
+ * MotoPress Mega Menu https://github.com/motopress/getwid-megamenu 
+ * Fixes bug where the mega menu toggle button is not accessible
+ * Since the anchor appears just before and it's text can become a label
+ * Code generates a unique id for each anchor and sets the aria-labelledby 
+ * attribute on the button using that id
+ */
+
+// Select all instances of the div containing the anchor and button
+var divs = document.querySelectorAll('.gw-mm-item__link');
+
+// Loop through each div instance
+divs.forEach(function (div) {
+  // Select the anchor and button within this specific div
+  var anchor = div.querySelector('a');
+  var button = div.querySelector('.gw-mm-item__toggle');
+
+  // Check if both elements exist
+  if (anchor && button) {
+    // Generate a unique ID for the anchor
+    var uniqueId = 'label-' + Math.random().toString(36).substr(2, 9);
+
+    // Set the ID attribute on the anchor
+    anchor.id = uniqueId;
+
+    // Set the aria-labelledby attribute on the button, referencing the anchor's ID
+    button.setAttribute('aria-labelledby', uniqueId);
+  }
+});
+
+/**
+ * MotoPress Mega Menu https://github.com/motopress/getwid-megamenu 
+ * uses a down arrow icon from dashicons which is not pretty
+ * Function watches for changes to the class attribute and updates it 
+ */
+
+// Function to update the class if it's not as expected
+function updateButtonClass(button) {
+  if (!button.classList.contains('dashicons-arrow-down-alt2')) {
+    button.classList.remove('dashicons-arrow-down');
+    button.classList.add('dashicons-arrow-down-alt2');
+  }
+}
+
+// Create a new MutationObserver instance
+var observer = new MutationObserver(function (mutations) {
+  mutations.forEach(function (mutation) {
+    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+      updateButtonClass(mutation.target);
+    }
+  });
+});
+
+// Options for the observer (which attributes to watch)
+var config = {
+  attributes: true,
+  attributeFilter: ['class']
+};
+
+// Select all buttons to be observed
+var buttons = document.querySelectorAll('.dashicons');
+
+// Start observing each button
+buttons.forEach(function (button) {
+  updateButtonClass(button); // Initial check
+  observer.observe(button, config);
+});
+
+/***/ }),
+
+/***/ "./scss/kks.scss":
+/*!***********************!*\
+  !*** ./scss/kks.scss ***!
+  \***********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/chunk loaded */
+/******/ 	(() => {
+/******/ 		var deferred = [];
+/******/ 		__webpack_require__.O = (result, chunkIds, fn, priority) => {
+/******/ 			if(chunkIds) {
+/******/ 				priority = priority || 0;
+/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
+/******/ 				deferred[i] = [chunkIds, fn, priority];
+/******/ 				return;
+/******/ 			}
+/******/ 			var notFulfilled = Infinity;
+/******/ 			for (var i = 0; i < deferred.length; i++) {
+/******/ 				var [chunkIds, fn, priority] = deferred[i];
+/******/ 				var fulfilled = true;
+/******/ 				for (var j = 0; j < chunkIds.length; j++) {
+/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
+/******/ 						chunkIds.splice(j--, 1);
+/******/ 					} else {
+/******/ 						fulfilled = false;
+/******/ 						if(priority < notFulfilled) notFulfilled = priority;
+/******/ 					}
+/******/ 				}
+/******/ 				if(fulfilled) {
+/******/ 					deferred.splice(i--, 1)
+/******/ 					var r = fn();
+/******/ 					if (r !== undefined) result = r;
+/******/ 				}
+/******/ 			}
+/******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	(() => {
+/******/ 		// no baseURI
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"/dist/kks": 0,
+/******/ 			"dist/kks": 0
+/******/ 		};
+/******/ 		
+/******/ 		// no chunk on demand loading
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 		
+/******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
+/******/ 		
+/******/ 		// install a JSONP callback for chunk loading
+/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
+/******/ 			var [chunkIds, moreModules, runtime] = data;
+/******/ 			// add "moreModules" to the modules object,
+/******/ 			// then flag all "chunkIds" as loaded and fire callback
+/******/ 			var moduleId, chunkId, i = 0;
+/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
+/******/ 				for(moduleId in moreModules) {
+/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/ 					}
+/******/ 				}
+/******/ 				if(runtime) var result = runtime(__webpack_require__);
+/******/ 			}
+/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
+/******/ 			for(;i < chunkIds.length; i++) {
+/******/ 				chunkId = chunkIds[i];
+/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 					installedChunks[chunkId][0]();
+/******/ 				}
+/******/ 				installedChunks[chunkId] = 0;
+/******/ 			}
+/******/ 			return __webpack_require__.O(result);
+/******/ 		}
+/******/ 		
+/******/ 		var chunkLoadingGlobal = self["webpackChunkkks_ollie"] = self["webpackChunkkks_ollie"] || [];
+/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
+/******/ 	__webpack_require__.O(undefined, ["dist/kks"], () => (__webpack_require__("./js/kks.js")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["dist/kks"], () => (__webpack_require__("./scss/kks.scss")))
+/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
+/******/ 	
+/******/ })()
+;
