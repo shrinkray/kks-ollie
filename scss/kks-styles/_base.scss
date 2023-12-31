@@ -1,5 +1,6 @@
 @use 'variables' as *;
 @use 'units' as *;
+@use 'mixins' as *;
 @use 'sass:color';
 
 .visually-hidden {
@@ -11,6 +12,29 @@
     white-space: nowrap;
 }
 
+.scroll-top {
+    width: 3rem;
+    height: 3rem;
+}
+
+.flex {
+    display: flex !important;
+
+    &.items-center {
+        align-items: center;
+    }
+    &.justify-center {
+        justify-content: center;
+    }
+}
+
+.scroll-span {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
 .is-style-term-button a {
     padding: 6px 12px;
     border-radius: var(--wp--preset--border-radius--medium);
@@ -250,7 +274,7 @@ a:where(:not(.wp-element-button)) {
     .is-position-sticky {
         position: -webkit-sticky;
         position: sticky;
-        top: 0;
+        top: -80px;
         z-index: 1200;
     }
 }
@@ -498,4 +522,15 @@ div[class*='wp-block-'],
         text-decoration: underline solid;
         text-underline-offset: 0.3rem;
     }
+}
+
+.scroll-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 99;
+  background-color: white;
+  opacity: 0.5;
+  cursor: pointer;
+  border-radius: .5rem;
 }
