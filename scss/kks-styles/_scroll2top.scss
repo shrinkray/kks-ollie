@@ -1,0 +1,20 @@
+.scroll-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 99;
+  background-color: white;
+  opacity: 0.5;
+  cursor: pointer;
+  border-radius: .5rem;
+  width: 3rem;
+  height: 3rem;
+}
+
+.scroll-span {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
