@@ -1,0 +1,82 @@
+
+// The Events Calendar plugin --tec-color-background-events-bar-submit-button var(--tec-color-text-events-bar-submit-button);
+.tribe-common-c-btn {
+    background-color: var(--wp--preset--color--primary) !important;
+    color: var(--wp--preset--color--white) !important;
+    border-radius: 0.4rem;
+    font-weight: bold;
+    white-space: nowrap;
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+    text-underline-offset: 0.3rem;
+
+    &:hover,
+    &:focus {
+        -webkit-text-decoration: underline solid;
+        text-decoration: underline solid;
+        text-underline-offset: 0.3rem;
+    }
+}
+.tribe-common .tribe-common-c-btn-border {
+    background-color: var(--wp--preset--color--white) !important;
+    border-color: var(--wp--preset--color--primary) !important;
+    border-radius: 0.4rem;
+    color: var(--wp--preset--color--primary) !important;
+    font-weight: bold;
+    white-space: nowrap;
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+    text-underline-offset: 0.3rem;
+
+    &:hover,
+    &:focus {
+        background-color: var(--wp--preset--color--primary) !important;
+    }
+
+    .tribe-events-c-subscribe-dropdown__button-text {
+        color: var(-wp--preset--color--primary) !important;
+        font-weight: bold;
+        white-space: nowrap;
+        -webkit-text-decoration: underline dotted;
+        text-decoration: underline dotted;
+        text-underline-offset: 0.3rem;
+
+        &:hover,
+        &:focus {
+            color: var(--wp--preset--color--white) !important;
+            -webkit-text-decoration: underline solid;
+            text-decoration: underline solid;
+            text-underline-offset: 0.3rem;
+        }
+    }
+}
+
+.tribe-events
+    .tribe-events-calendar-list__event-title
+    .tribe-events-calendar-list__event-title-link,
+.tribe-common .tribe-common-anchor-thin {
+    color: var(--wp--preset--color--primary) !important;
+    font-weight: bold;
+    white-space: nowrap;
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+    -webkit-text-decoration-color: var(--wp--preset--color--primary) !important;
+    text-decoration-color: var(--wp--preset--color--primary) !important;
+    text-underline-offset: 0.3rem;
+
+    &:hover,
+    &:focus {
+        color: var(--wp--preset--color--primary) !important;
+        -webkit-text-decoration-color: var(
+            --wp--preset--color--primary
+        ) !important;
+        text-decoration-color: var(--wp--preset--color--primary) !important;
+        text-underline-offset: 0.3rem;
+        -webkit-text-decoration: underline solid;
+        text-decoration: underline solid;
+    }
+}
+
+.tribe-common-c-svgicon {
+    color: var(--wp--preset--color--primary) !important;
+}

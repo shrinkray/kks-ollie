@@ -1,6 +1,8 @@
 @use 'variables' as *;
 @use 'units' as *;
 @use 'mixins' as *;
+@use 'scroll2top' as *;
+@use 'events' as *;
 @use 'sass:color';
 
 .visually-hidden {
@@ -10,11 +12,6 @@
     overflow: hidden;
     clip: rect(1px, 1px, 1px, 1px);
     white-space: nowrap;
-}
-
-.scroll-top {
-    width: 3rem;
-    height: 3rem;
 }
 
 .flex {
@@ -28,13 +25,6 @@
     }
 }
 
-.scroll-span {
-    display: block;
-    position: relative;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
 .is-style-term-button a {
     padding: 6px 12px;
     border-radius: var(--wp--preset--border-radius--medium);
@@ -47,10 +37,12 @@
     }
 }
 
+// Cover block
 .wp-block-cover:has(>.wp-block-cover__background) {
         margin-top: 0;
     }
 
+// Search Input
 .wp-block-search__input {
     background-color: var(--wp--preset--color--tertiary);
     color: black;
@@ -61,6 +53,7 @@
     border-bottom: 0.05rem solid #d0ccde;
 }
 
+// Header
 .section--products,
 .section--stem-blog {
     img {
@@ -76,32 +69,6 @@
     }
 }
 
-.footer--content {
-    .logo--container {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        padding: 0;
-        margin: 0;
-
-        .site--logo {
-            aspect-ratio: 3/2;
-            background-repeat: no-repeat;
-            background-position-y: bottom;
-            background-image: url('#{$footerLogo}');
-            margin: 0 !important;
-            padding: 0;
-            width: 250px;
-            height: 167px;
-
-            .site--title {
-                color: transparent;
-                position: absolute;
-                top: -800px;
-            }
-        }
-    }
-}
 .header--nav {
     .logo--container {
         display: flex;
@@ -226,6 +193,26 @@ nav {
     }
 }
 
+// Navigation + Blocks
+.left-padding-1 {
+    padding-left: 1rem;
+}
+.wp-block-group {
+    margin-top: 0;
+}
+
+.wp-site-blocks {
+    min-height: 100vh;
+
+    .is-position-sticky {
+        position: -webkit-sticky;
+        position: sticky;
+        top: -115px;
+        z-index: 1200;
+    }
+}
+
+// Anchor
 a {
     color: var(--wp--preset--color--primary);
     -webkit-text-decoration: underline dotted;
@@ -261,24 +248,36 @@ a:where(:not(.wp-element-button)) {
         }
     }
 }
-.left-padding-1 {
-    padding-left: 1rem;
-}
-.wp-block-group {
-    margin-top: 0;
-}
 
-.wp-site-blocks {
-    min-height: 100vh;
+// footer
+.footer--content {
+    .logo--container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 0;
+        margin: 0;
 
-    .is-position-sticky {
-        position: -webkit-sticky;
-        position: sticky;
-        top: -115px;
-        z-index: 1200;
+        .site--logo {
+            aspect-ratio: 3/2;
+            background-repeat: no-repeat;
+            background-position-y: bottom;
+            background-image: url('#{$footerLogo}');
+            margin: 0 !important;
+            padding: 0;
+            width: 250px;
+            height: 167px;
+
+            .site--title {
+                color: transparent;
+                position: absolute;
+                top: -800px;
+            }
+        }
     }
 }
 
+// posts table
 .posts-data-table {
     .odd {
         background-color: var(--wp--preset--color--tertiary);
@@ -319,6 +318,7 @@ div[class*='wp-block-'],
 }
 
 // use with locations where a date is set
+// TODO: check if this is being used anywhere
 .dashicons-calendar-alt {
     margin-top: 3px;
 }
@@ -402,88 +402,6 @@ div[class*='wp-block-'],
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.08);
 }
 
-// The Events Calendar plugin --tec-color-background-events-bar-submit-button var(--tec-color-text-events-bar-submit-button);
-.tribe-common-c-btn {
-    background-color: var(--wp--preset--color--primary) !important;
-    color: var(--wp--preset--color--white) !important;
-    border-radius: 0.4rem;
-    font-weight: bold;
-    white-space: nowrap;
-    -webkit-text-decoration: underline dotted;
-    text-decoration: underline dotted;
-    text-underline-offset: 0.3rem;
-
-    &:hover,
-    &:focus {
-        -webkit-text-decoration: underline solid;
-        text-decoration: underline solid;
-        text-underline-offset: 0.3rem;
-    }
-}
-.tribe-common .tribe-common-c-btn-border {
-    background-color: var(--wp--preset--color--white) !important;
-    border-color: var(--wp--preset--color--primary) !important;
-    border-radius: 0.4rem;
-    color: var(--wp--preset--color--primary) !important;
-    font-weight: bold;
-    white-space: nowrap;
-    -webkit-text-decoration: underline dotted;
-    text-decoration: underline dotted;
-    text-underline-offset: 0.3rem;
-
-    &:hover,
-    &:focus {
-        background-color: var(--wp--preset--color--primary) !important;
-    }
-
-    .tribe-events-c-subscribe-dropdown__button-text {
-        color: var(-wp--preset--color--primary) !important;
-        font-weight: bold;
-        white-space: nowrap;
-        -webkit-text-decoration: underline dotted;
-        text-decoration: underline dotted;
-        text-underline-offset: 0.3rem;
-
-        &:hover,
-        &:focus {
-            color: var(--wp--preset--color--white) !important;
-            -webkit-text-decoration: underline solid;
-            text-decoration: underline solid;
-            text-underline-offset: 0.3rem;
-        }
-    }
-}
-
-.tribe-events
-    .tribe-events-calendar-list__event-title
-    .tribe-events-calendar-list__event-title-link,
-.tribe-common .tribe-common-anchor-thin {
-    color: var(--wp--preset--color--primary) !important;
-    font-weight: bold;
-    white-space: nowrap;
-    -webkit-text-decoration: underline dotted;
-    text-decoration: underline dotted;
-    -webkit-text-decoration-color: var(--wp--preset--color--primary) !important;
-    text-decoration-color: var(--wp--preset--color--primary) !important;
-    text-underline-offset: 0.3rem;
-
-    &:hover,
-    &:focus {
-        color: var(--wp--preset--color--primary) !important;
-        -webkit-text-decoration-color: var(
-            --wp--preset--color--primary
-        ) !important;
-        text-decoration-color: var(--wp--preset--color--primary) !important;
-        text-underline-offset: 0.3rem;
-        -webkit-text-decoration: underline solid;
-        text-decoration: underline solid;
-    }
-}
-
-.tribe-common-c-svgicon {
-    color: var(--wp--preset--color--primary) !important;
-}
-
 .is-box-shadow {
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
@@ -504,6 +422,7 @@ div[class*='wp-block-'],
     transform: rotate(3deg);
 }
 
+// Hero button
 .is-hero-outline-button {
     border: 0.1rem solid var(--wp--preset--color--tertiary);
     border-radius: 0.4rem;
@@ -522,15 +441,4 @@ div[class*='wp-block-'],
         text-decoration: underline solid;
         text-underline-offset: 0.3rem;
     }
-}
-
-.scroll-top {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  z-index: 99;
-  background-color: white;
-  opacity: 0.5;
-  cursor: pointer;
-  border-radius: .5rem;
 }
