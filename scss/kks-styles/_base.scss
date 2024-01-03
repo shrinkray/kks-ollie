@@ -25,6 +25,10 @@
     }
 }
 
+.justify-self-end {
+    justify-self: end !important;
+}
+
 .is-style-term-button a {
     padding: 6px 12px;
     border-radius: var(--wp--preset--border-radius--medium);
@@ -201,16 +205,7 @@ nav {
     margin-top: 0;
 }
 
-.wp-site-blocks {
-    min-height: 100vh;
 
-    .is-position-sticky {
-        position: -webkit-sticky;
-        position: sticky;
-        top: -115px;
-        z-index: 1200;
-    }
-}
 
 // Anchor
 a {
@@ -321,6 +316,91 @@ div[class*='wp-block-'],
 // TODO: check if this is being used anywhere
 .dashicons-calendar-alt {
     margin-top: 3px;
+}
+
+.wp-block-search__button {
+    padding: 0.5rem;
+}
+
+@media screen and (min-width: 1228px) {
+
+    .wp-site-blocks {
+        min-height: 100vh;
+
+        .is-position-sticky {
+            position: -webkit-sticky;
+            position: sticky;
+            top: -118px;
+            z-index: 1200;
+        }
+    }
+    .admin-bar {
+        .wp-site-blocks {
+        min-height: 100vh;
+
+            .is-position-sticky {
+                position: -webkit-sticky;
+                position: sticky;
+                top: -151px;
+                z-index: 1200;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1227px) {
+    
+    .wp-site-blocks {
+    min-height: 100vh;
+
+        .is-position-sticky {
+            position: -webkit-sticky;
+            position: sticky;
+            top: -150px;
+            z-index: 1200;
+        }
+    }
+    .admin-bar {
+        .wp-site-blocks {
+        min-height: 100vh;
+
+            .is-position-sticky {
+                position: -webkit-sticky;
+                position: sticky;
+                top: -180px;
+                z-index: 1200;
+            }
+        }
+    }  
+    input:not([type="submit"]) {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 806px) {
+    
+    .wp-site-blocks {
+    min-height: 100vh;
+
+        .is-position-sticky {
+            position: -webkit-sticky;
+            position: sticky;
+            top: -212px;
+            z-index: 1200;
+        }
+    }
+    .admin-bar {
+        .wp-site-blocks {
+        min-height: 100vh;
+
+            .is-position-sticky {
+                position: -webkit-sticky;
+                position: sticky;
+                top: -244px;
+                z-index: 1200;
+            }
+        }
+    }  
 }
 
 @media screen and (max-width: 600px) {
