@@ -47,3 +47,19 @@ function tg_include_custom_post_types_in_archive_pages( $query ) {
     }
 }
 add_action( 'pre_get_posts', 'tg_include_custom_post_types_in_archive_pages' );
+
+ 
+function kks_add_image_sizes() {
+    add_image_size('post-thumbnail', 200, 120, true); // 
+    add_image_size('post-thumbnail-square', 120, 120, true); // 
+    add_image_size('post-featured-full', 768, 467, true); // in post featured image
+    add_image_size('post-featured-mobile', 665, 400, true); // in post featured image mobile
+    add_image_size('post-portrait-image', 185, 240, true); // inline post portrait image
+    add_image_size('story-inline-image', 210, 210, true); //  inline story image
+    add_image_size('page-inline-1col', 354, 200, true); //  inline page image
+    add_image_size('page-inline-sq-1col', 354, 354, true); //  inline page square
+    add_image_size('page-inline-2col', 808, 606, true); //  inline page image
+    add_image_size('page-inline-2col-edp', 378, 190, true); //  EDP inline page image
+    add_image_size('page-inline-1col-image', 410, 302, true); // 4:3 on col image inline page image
+}
+add_action('after_setup_theme', 'kks_add_image_sizes');
