@@ -14,4 +14,10 @@ mix
             },
         }),
     ])
-    .js(['js/kks.js', 'js/motopress.js', 'js/scrolltop.js'], 'dist/kks.js');
+    .js([ 'js/kks.js', 'js/motopress.js', 'js/scrolltop.js' ], 'dist/kks.js');
+
+    mix.webpackConfig({
+        stats: {
+            children: false,
+        },
+    });
