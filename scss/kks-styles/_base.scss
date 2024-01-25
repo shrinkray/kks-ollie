@@ -25,9 +25,20 @@
     }
 }
 
-.hello-message {
-    flex-wrap: nowrap
+.is-nowrap {
+    white-space: nowrap !important;
+    flex-wrap: nowrap !important;
 }
+
+.is-wrap {
+    flex-wrap: wrap !important;
+    white-space: normal !important;
+}
+
+.is-break-spaces {
+    white-space: break-spaces !important;
+}
+
 
 .justify-self-end {
     justify-self: end !important;
@@ -317,13 +328,8 @@ div[class*='wp-block-'],
 }
 
 // use with locations where a date is set
-// TODO: check if this is being used anywhere
-.dashicons-calendar-alt {
-    margin-top: 3px;
-}
-
 .wp-block-search__button {
-    padding: 0.5rem;
+    padding: 2rem 2.5rem;
 }
 
 @media screen and (min-width: 1228px) {
@@ -376,9 +382,18 @@ div[class*='wp-block-'],
             }
         }
     }  
-    input:not([type="submit"]) {
-        width: 50%;
-    }
+}
+
+@media screen and (max-width: 1000px){
+
+    .hero-column-collapse >.wp-block-column {
+    flex-basis: 100% !important;
+    flex-wrap: wrap !important;
+}
+// .wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column {
+//     flex-basis: 100%!important;
+// }
+
 }
 
 @media screen and (max-width: 806px) {
@@ -405,6 +420,9 @@ div[class*='wp-block-'],
             }
         }
     }  
+    .wp-block-search {
+        justify-content: flex-end;
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -441,7 +459,12 @@ div[class*='wp-block-'],
     .wp-container-24 {
         box-shadow: none;
     }
+
+    .search-widget {
+        justify-content: flex-end;
+    }
 }
+
 @media screen and (max-width: 400px) {
     .logo--nav--container {
         display: flex;
@@ -490,21 +513,21 @@ div[class*='wp-block-'],
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
-.is-minus-2-deg {
-    transform: rotate(-2deg);
-}
+// .is-minus-2-deg {
+//     transform: rotate(-2deg);
+// }
 
-.is-minus-3-deg {
-    transform: rotate(-3deg);
-}
+// .is-minus-3-deg {
+//     transform: rotate(-3deg);
+// }
 
-.is-plus-2-deg {
-    transform: rotate(2deg);
-}
+// .is-plus-2-deg {
+//     transform: rotate(2deg);
+// }
 
-.is-plus-3-deg {
-    transform: rotate(3deg);
-}
+// .is-plus-3-deg {
+//     transform: rotate(3deg);
+// }
 
 // Hero button
 .is-hero-outline-button {
