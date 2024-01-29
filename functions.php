@@ -48,7 +48,9 @@ function tg_include_custom_post_types_in_archive_pages( $query ) {
 }
 add_action( 'pre_get_posts', 'tg_include_custom_post_types_in_archive_pages' );
 
- 
+
+
+// Add custom image sizes
 function kks_add_image_sizes() {
     add_image_size('post-thumbnail', 200, 120, true); // 
     add_image_size('post-thumbnail-square', 120, 120, true); // 
@@ -63,3 +65,29 @@ function kks_add_image_sizes() {
     add_image_size('page-inline-1col-image', 410, 302, true); // 4:3 on col image inline page image
 }
 add_action('after_setup_theme', 'kks_add_image_sizes');
+
+
+
+// Add custom image sizes to media library
+function kks_custom_sizes( $sizes ) {
+    return array_merge( $sizes, array(
+        'post-thumbnail' => __( 'Post Thumbnail' ),
+        'post-thumbnail-square' => __( 'Post Thumbnail Square' ),
+        'post-featured-full' => __( 'Post Featured Full' ),
+        'post-featured-mobile' => __( 'Post Featured Mobile' ),
+        'post-portrait-image' => __( 'Post Portrait Image' ),
+        'story-inline-image' => __( 'Story Inline Image' ),
+        'page-inline-1col' => __( 'Page Inline 1 Col' ),
+        'page-inline-sq-1col' => __( 'Page Inline Square 1 Col' ),
+        'page-inline-2col' => __( 'Page Inline 2 Col' ),
+        'page-inline-2col-edp' => __( 'Page Inline 2 Col EDP' ),
+        'page-inline-1col-image' => __( 'Page Inline 1 Col Image' ),
+    ) );
+}
+add_filter( 'image_size_names_choose', 'kks_custom_sizes' );
+
+// Enable featured images
+add_theme_support( 'post-thumbnails' );
+
+// Add new image sizes in theme
+the_post_thumbnail( 'post-featured-full' );
