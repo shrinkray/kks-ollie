@@ -17,7 +17,15 @@ mix
     .js([ 'js/kks.js', 'js/motopress.js', 'js/scrolltop.js' ], 'dist/kks.js');
 
     mix.webpackConfig({
-        stats: {
-            children: false,
-        },
+        stats: 'verbose',
+    }).webpackConfig({
+        plugins: [
+            new CleanWebpackPlugin({
+                dry: true,
+                verbose: true,
+                cleanStaleWebpackAssets: true,
+                protectWebpackAssets: true,
+                cleanOnceBeforeBuildPatterns: ['dist/*'],
+            }),
+        ],
     });
