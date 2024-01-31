@@ -481,6 +481,13 @@ div[class*='wp-block-'],
     }
 }
 
+// wp-block group
+.wp-block {
+    &-post-title {
+        white-space: break-spaces;
+    }
+}
+
 // div containing navigation
 .wp-container-24 {
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.08);
