@@ -1,6 +1,9 @@
 /* Add sticky header class
  * https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
  * .is-position-sticky is disabled in mobile view
+ * Moved search functionality to search.js, have dropped this from the webpack.mix.js file
+ * Moved motoPress functionality to motopress.js
+ * Moved scroll to top functionality to scrolltop.js
  */
 const siteHeader = document.querySelector('.site-header');
 siteHeader.classList.add('is-position-sticky');
@@ -36,7 +39,3 @@ siteLogos.forEach(function (siteLogo) {
         console.log('Parent node not found for:', siteLogo);
     }
 });
-
-// make the label of the search field invisible
-const searchLabel = document.querySelector('.wp-block-search__label');
-searchLabel.classList.add('visually-hidden');

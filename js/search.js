@@ -1,10 +1,18 @@
 /**
  * @date 2024-01-25
  * Replace Search button with Search icon
- * dropped from the webpack.mix.js file 
+ * dropped from the webpack.mix.js file
+ * 
+ * Modifying the visual appearance of the Search button adds too much layout shift when the site loads
  */
 
 document.addEventListener('DOMContentLoaded', function () {
+    // Find the search label
+    const searchLabel = document.querySelector('.wp-block-search__label');
+
+    // visually hide the label
+    searchLabel.classList.add('visually-hidden');
+
     // Find the search button
     const searchButton = document.querySelector('.wp-block-search__button');
 
@@ -31,5 +39,8 @@ document.addEventListener('DOMContentLoaded', function () {
         '<path d="M15.5 14h-.79l-.28-.27a6.471 6.471 0 0 0 1.57-5.09C15.1 4.61 12.28 2 9 2S2.9 4.61 2.9 8.64s2.82 6.64 6.1 6.64c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6.5 0C7.01 14 5 11.98 5 9.5S7.01 5 9.5 5 14 7.02 14 9.5 11.99 14 9 14z"></path>';
 
     // Append the SVG to the button
-    searchButton.appendChild(svgElement);
+  searchButton.appendChild(svgElement);
+  
+  // Add a class to the svg
+  svgElement.classList.add('search-icon');
 });
