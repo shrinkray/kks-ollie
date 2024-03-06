@@ -130,7 +130,7 @@ function js_hook_scripts() {
         <?php
     } else {
         // If the site URL is not 'koolkatscience.net', do nothing
-        echo 'Site URL is not koolkatscience.net';
+        echo '<!-- Site URL is not koolkatscience.net -->';
         return;
     }
 }
