@@ -128,6 +128,10 @@ function js_hook_scripts() {
         </noscript>
         <!-- End Meta Pixel Code -->
         <?php
+    } else {
+        // If the site URL is not 'koolkatscience.net', do nothing
+        echo 'Site URL is not koolkatscience.net';
+        return;
     }
 }
 
