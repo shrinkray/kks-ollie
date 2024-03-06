@@ -95,23 +95,23 @@ the_post_thumbnail( 'post-featured-full' );
 // Add Facebook Pixel to site
 
 function js_hook_scripts() {
-    echo  `<!-- Meta Pixel Code -->`
-    echo  `<script>`
-    echo  `!function(f,b,e,v,n,t,s)`
-    echo  `{if(f.fbq)return;n=f.fbq=function(){n.callMethod?`
-    echo  `n.callMethod.apply(n,arguments):n.queue.push(arguments)};`
-    echo  `if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';`
-    echo  `n.queue=[];t=b.createElement(e);t.async=!0;`
-    echo  `t.src=v;s=b.getElementsByTagName(e)[0];`
-    echo  `s.parentNode.insertBefore(t,s)}(window, document,'script',`
-    echo  `https://connect.facebook.net/en_US/fbevents.js');`
-    echo  `fbq('init', '1123271415696787');`
-    echo  `fbq('track', 'PageView');`
-    echo  `</script>`
-    echo  `<noscript><img height="1" width="1" style="display:none"`
-    echo  `src="https://www.facebook.com/tr?id=1123271415696787&ev=PageView&noscript=1"`
-    echo  `/></noscript>`
-    echo  `<!-- End Meta Pixel Code -->`
+    echo  `<!-- Meta Pixel Code -->`;
+    echo  `<script>`;
+    echo  `!function(f,b,e,v,n,t,s)`;
+    echo  `{if(f.fbq)return;n=f.fbq=function(){n.callMethod?`;
+    echo  `n.callMethod.apply(n,arguments):n.queue.push(arguments)};`;
+    echo  `if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';`;
+    echo  `n.queue=[];t=b.createElement(e);t.async=!0;`;
+    echo  `t.src=v;s=b.getElementsByTagName(e)[0];`;
+    echo  `s.parentNode.insertBefore(t,s)}(window, document,'script',`;
+    echo  `https://connect.facebook.net/en_US/fbevents.js');`;
+    echo  `fbq('init', '1123271415696787');`;
+    echo  `fbq('track', 'PageView');`;
+    echo  `</script>`;
+    echo  `<noscript><img height="1" width="1" style="display:none"`;
+    echo  `src="https://www.facebook.com/tr?id=1123271415696787&ev=PageView&noscript=1"`;
+    echo  `/></noscript>`;
+    echo  `<!-- End Meta Pixel Code -->`;
 }
 
 // add scripts to wp_head in frontend 
