@@ -1,6 +1,5 @@
 @use 'variables' as *;
 @use 'units' as *;
-@use 'mixins' as *;
 @use 'scroll2top' as *;
 @use 'events' as *;
 @use 'sass:color';
@@ -25,20 +24,9 @@
     }
 }
 
-.is-nowrap {
-    white-space: nowrap !important;
-    flex-wrap: nowrap !important;
+.hello-message {
+    flex-wrap: nowrap
 }
-
-.is-wrap {
-    flex-wrap: wrap !important;
-    white-space: normal !important;
-}
-
-.is-break-spaces {
-    white-space: break-spaces !important;
-}
-
 
 .justify-self-end {
     justify-self: end !important;
@@ -66,6 +54,9 @@
     background-color: var(--wp--preset--color--tertiary);
     color: black;
 }
+
+// Search Button styles
+
 
 .header--container {
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.08);
@@ -328,9 +319,11 @@ div[class*='wp-block-'],
 }
 
 // use with locations where a date is set
+
 .wp-block-search__button {
-    padding: 2rem 2.5rem;
+    padding: .5rem 1rem .3rem;
 }
+   
 
 @media screen and (min-width: 1228px) {
 
@@ -382,18 +375,9 @@ div[class*='wp-block-'],
             }
         }
     }  
-}
-
-@media screen and (max-width: 1000px){
-
-    .hero-column-collapse >.wp-block-column {
-    flex-basis: 100% !important;
-    flex-wrap: wrap !important;
-}
-// .wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column {
-//     flex-basis: 100%!important;
-// }
-
+    input:not([type="submit"]) {
+        width: 50%;
+    }
 }
 
 @media screen and (max-width: 806px) {
@@ -420,9 +404,6 @@ div[class*='wp-block-'],
             }
         }
     }  
-    .wp-block-search {
-        justify-content: flex-end;
-    }
 }
 
 @media screen and (max-width: 600px) {
@@ -459,12 +440,7 @@ div[class*='wp-block-'],
     .wp-container-24 {
         box-shadow: none;
     }
-
-    .search-widget {
-        justify-content: flex-end;
-    }
 }
-
 @media screen and (max-width: 400px) {
     .logo--nav--container {
         display: flex;
@@ -504,6 +480,13 @@ div[class*='wp-block-'],
     }
 }
 
+// wp-block group
+.wp-block {
+    &-post-title {
+        white-space: break-spaces;
+    }
+}
+
 // div containing navigation
 .wp-container-24 {
     box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.08);
@@ -513,6 +496,7 @@ div[class*='wp-block-'],
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
+// These are no longer used
 // .is-minus-2-deg {
 //     transform: rotate(-2deg);
 // }

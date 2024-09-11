@@ -2,6 +2,7 @@
 // Sept 25, 2023 Shrinkray
 
 const mix = require('laravel-mix');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 mix
     // .disableNotifications()
@@ -14,10 +15,18 @@ mix
             },
         }),
     ])
-    .js([ 'js/kks.js', 'js/motopress.js', 'js/scrolltop.js' ], 'dist/kks.js');
+    .js([ 'js/kks.js', 'js/motopress.js', 'js/scrolltop.js' ], 'dist/kks.js'); // removed search.js
 
     mix.webpackConfig({
-        stats: {
-            children: false,
-        },
+        stats: 'normal',  // verbose, normal, minimal, none
+    }).webpackConfig({
+        plugins: [
+            new CleanWebpackPlugin({
+                dry: false,
+                verbose: false,
+                cleanStaleWebpackAssets: true,
+                protectWebpackAssets: false,
+                cleanOnceBeforeBuildPatterns: ['dist/kks.css', 'dist/kks.js'],
+            }),
+        ],
     });
