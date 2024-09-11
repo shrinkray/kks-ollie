@@ -16,26 +16,27 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/plugin-transform-object-rest-spread": "^7.23.4",
-    "autoprefixer": "^10.4.16",
+    "@babel/plugin-transform-object-rest-spread": "^7.24.7",
+    "@wordpress/prettier-config": "^4.7.0",
+    "autoprefixer": "^10.4.20",
     "clean-webpack-plugin": "^4.0.0",
     "cross-env": "^7.0.3",
     "laravel-mix": "^6.0.49",
     "laravel-mix-purgecss": "^6.0.0",
-    "postcss": "^8.4.32",
+    "postcss": "^8.4.45",
     "postcss-cli": "^10.1.0",
-    "postcss-custom-properties": "^13.3.2",
+    "postcss-custom-properties": "^13.3.12",
     "postcss-import": "^15.1.0",
-    "postcss-nesting": "^12.0.1",
-    "postcss-preset-env": "^9.3.0",
+    "postcss-nesting": "^12.1.5",
+    "postcss-preset-env": "^9.6.0",
     "postcss-pseudo-is": "^0.3.0",
     "postcss-sorting": "^8.0.2",
     "postcss-subgrid": "^1.1.0",
     "postcss-url": "^10.1.3",
-    "prettier": "^3.1.0",
     "resolve-url-loader": "^5.0.0",
-    "sass": "^1.69.5",
-    "sass-loader": "^13.3.2",
-    "webpack": "^5.89.0"
-  }
+    "sass": "^1.78.0",
+    "sass-loader": "^13.3.3",
+    "webpack": "^5.94.0"
+  },
+  "packageManager": "pnpm@8.5.1+sha512.5ba7a52fb370c346bf302202933a646f15ba7fdf5342e5f80ee2680e35a9dfd5f4f0f283904a60e1c823ddde84b606000dc7505a5fde33c35d94b255137460a4"
 }
