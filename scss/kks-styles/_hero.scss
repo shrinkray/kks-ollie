@@ -1,0 +1,34 @@
+/* CSS to style the hero section targeting media queries */
+
+.wp-block-cover {
+
+	@media screen and (max-width: 768px) {
+
+		&.is-offset-in-mobile {
+			margin-bottom: 16rem !important;
+			overflow: visible !important;
+
+		}
+		> .hero-cta {
+			display: block;
+			position: relative;
+			bottom:-14rem !important;
+		}
+
+    @media screen and (max-width: 400px) {
+
+		&.is-offset-in-mobile {
+			margin-bottom: 16rem !important;
+			overflow: visible !important;
+
+			>.wp-block-group {
+				padding: 0;
+				}
+			
+			}
+			
+		}
+ 
+	}
+
+}
