@@ -2,33 +2,35 @@
 
 .wp-block-cover {
 
-	@media screen and (max-width: 768px) {
+	@media screen and (max-width: 781px) {
 
 		&.is-offset-in-mobile {
-			margin-bottom: 16rem !important;
+			//margin-bottom: -16rem !important;
 			overflow: visible !important;
-
-		}
-		> .hero-cta {
-			display: block;
-			position: relative;
-			bottom:-14rem !important;
 		}
 
-    @media screen and (max-width: 400px) {
+		.cta-group {
 
-		&.is-offset-in-mobile {
-			margin-bottom: 16rem !important;
-			overflow: visible !important;
-
-			>.wp-block-group {
-				padding: 0;
-				}
-			
+			> :has(.hero-cta) {
+				padding: 0 !important;
 			}
-			
+
 		}
- 
+
+		.hero-cta {
+			position: relative;
+			top: 16rem !important;
+		}
+
+	}
+}
+main {
+
+	@media screen and (max-width: 781px) {
+		
+		.what-is-stem-group {
+				margin-top: 16rem !important;
+			}
 	}
 
 }

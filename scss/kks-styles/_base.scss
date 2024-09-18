@@ -141,7 +141,7 @@
     }
 
     &__dropdown {
-        background-color: oklab(0.97 -0 0 1);
+        background-color: oklab(0.97 -0 0.1);
         // background-color: var(--wp--preset--color--tertiary);
         box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.08);
         border-bottom-right-radius: 1rem;
@@ -496,23 +496,6 @@ div[class*='wp-block-'],
 .is-box-shadow {
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
-
-// These are no longer used
-// .is-minus-2-deg {
-//     transform: rotate(-2deg);
-// }
-
-// .is-minus-3-deg {
-//     transform: rotate(-3deg);
-// }
-
-// .is-plus-2-deg {
-//     transform: rotate(2deg);
-// }
-
-// .is-plus-3-deg {
-//     transform: rotate(3deg);
-// }
 
 // Hero button
 .is-hero-outline-button {
