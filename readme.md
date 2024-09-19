@@ -6,6 +6,26 @@ The KKS Ollie theme works out of the box and intended to modify the parent, Olli
 - `composer run wpcs:scan`
 - `composer run wpcs:fix`
 
+Write custom SCSS and manage code styling using Prettier and Laravel Mix. 
+
+- `npx mix` 
+- `npx mix watch` 
+- `npx mix watch --hot`
+- `npx mix --production` 
+
+- `npx format css`
+- `npx format js`
+
+## Features
+
+This theme includes custom code to manipulate it's design (which is produced within OllieWP). In other words, your mileage will vary based on the code organization and classes added to that design.
+
+### Feature Hero
+
+- This update is designed to promote the content of the cover background image. 
+- On narrower screens, the CTA panel is lowered to feature one of the subjects of the image. 
+- On wider screens, the CTA appears on the right column whereas the subjects of the image are to the left. 
+
 ## Getting Started with Ollie
 
 | Links  | Description |
