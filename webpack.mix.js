@@ -15,7 +15,7 @@ mix
             },
         }),
     ])
-    .js([ 'js/kks.js', 'js/motopress.js', 'js/scrolltop.js' ], 'dist/kks.js'); // removed search.js
+    .js([ 'js/kks.js', 'js/motopress.js', 'js/scrolltop.js' ], 'dist/kks.js');
 
     mix.webpackConfig({
         stats: 'normal',  // verbose, normal, minimal, none
