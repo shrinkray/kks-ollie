@@ -45,5 +45,18 @@
         "sass": "^1.79.1",
         "sass-loader": "^13.3.3",
         "webpack": "^5.94.0"
-    }
+    },
+	"repositories": [
+		{
+		"type": "composer",
+		"url": "https://composer.deliciousbrains.com"
+		}
+	],
+	"require": {
+		"deliciousbrains-plugin/wp-migrate-db-pro": "*",
+		"deliciousbrains-plugin/wp-migrate-db-pro-cli": "*",
+		"deliciousbrains-plugin/wp-migrate-db-pro-media-files": "*",
+		"deliciousbrains-plugin/wp-migrate-db-pro-multisite-tools": "*",
+		"deliciousbrains-plugin/wp-migrate-db-pro-theme-plugin-files": "*"
+	}
 }
