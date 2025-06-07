@@ -136,3 +136,36 @@ function js_hook_scripts() {
 }
 
 add_action('wp_head', 'js_hook_scripts');
+
+/**
+ * Adjust WordPress heartbeat settings
+ */
+function kks_heartbeat_settings($settings) {
+    // Increase the interval to 60 seconds (default is 15-60)
+    $settings['interval'] = 60;
+    
+    // Set a minimum interval to prevent too frequent requests
+    $settings['minimalInterval'] = 60;
+    
+    return $settings;
+}
+add_filter('heartbeat_settings', 'kks_heartbeat_settings');
+
+/**
+ * Extend session lifetime
+ */
+function kks_extend_session_lifetime($lifetime) {
+    // Extend session lifetime to 24 hours (default is 2 hours)
+    return 86400;
+}
+add_filter('auth_cookie_expiration', 'kks_extend_session_lifetime');
+
+/**
+ * Prevent session expiration during active use
+ */
+function kks_refresh_session($user_id) {
+    if ($user_id) {
+        wp_set_auth_cookie($user_id, true);
+    }
+}
+add_action('wp_ajax_heartbeat', 'kks_refresh_session', 1); 
