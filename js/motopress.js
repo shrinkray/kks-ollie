@@ -10,7 +10,7 @@
 const divs = document.querySelectorAll('.gw-mm-item__link');
 
 // Loop through each div instance
-divs.forEach((div) => {
+divs.forEach(div => {
     // Select the anchor and button within this specific div
     const anchor = div.querySelector('a');
     const button = div.querySelector('.gw-mm-item__toggle');
@@ -43,12 +43,9 @@ function updateButtonClass(button) {
 }
 
 // Create a new MutationObserver instance
-const observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-        if (
-            mutation.type === 'attributes' &&
-            mutation.attributeName === 'class'
-        ) {
+const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
             updateButtonClass(mutation.target);
         }
     });
@@ -61,7 +58,7 @@ const config = { attributes: true, attributeFilter: ['class'] };
 const buttons = document.querySelectorAll('.dashicons');
 
 // Start observing each button
-buttons.forEach((button) => {
+buttons.forEach(button => {
     updateButtonClass(button); // Initial check
     observer.observe(button, config);
 });
