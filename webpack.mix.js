@@ -15,18 +15,18 @@ mix
             },
         }),
     ])
-    .js([ 'js/kks.js', 'js/motopress.js', 'js/scrolltop.js' ], 'dist/kks.js');
+    .js(['js/kks.js', 'js/motopress.js', 'js/scrolltop.js'], 'dist/kks.js');
 
-    mix.webpackConfig({
-        stats: 'normal',  // verbose, normal, minimal, none
-    }).webpackConfig({
-        plugins: [
-            new CleanWebpackPlugin({
-                dry: false,
-                verbose: false,
-                cleanStaleWebpackAssets: true,
-                protectWebpackAssets: false,
-                cleanOnceBeforeBuildPatterns: ['dist/kks.css', 'dist/kks.js'],
-            }),
-        ],
-    });
+mix.webpackConfig({
+    stats: 'normal', // verbose, normal, minimal, none
+}).webpackConfig({
+    plugins: [
+        new CleanWebpackPlugin({
+            dry: false,
+            verbose: false,
+            cleanStaleWebpackAssets: true,
+            protectWebpackAssets: false,
+            cleanOnceBeforeBuildPatterns: ['dist/kks.css', 'dist/kks.js'],
+        }),
+    ],
+});
