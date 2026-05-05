@@ -6,15 +6,20 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 mix
     // .disableNotifications()
+    // Keep url() verbatim so paths stay relative to dist/kks.css — WordPress is not hosted at /
+    .options({
+        processCssUrls: false,
+        postCss: [
+            require('postcss-preset-env')({
+                stage: 0,
+                features: {
+                    'nesting-rules': true,
+                },
+            }),
+        ],
+    })
     .sass('scss/kks.scss', 'dist')
-    .postCss('dist/kks.css', 'dist', [
-        require('postcss-preset-env')({
-            stage: 0,
-            features: {
-                'nesting-rules': true,
-            },
-        }),
-    ])
+    .copy('assets/kks-katz-logo.svg', 'images/kks-katz-logo.svg')
     .js(['js/kks.js', 'js/motopress.js', 'js/scrolltop.js'], 'dist/kks.js');
 
 mix.webpackConfig({
