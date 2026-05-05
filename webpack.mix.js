@@ -30,3 +30,12 @@ mix.webpackConfig({
         }),
     ],
 });
+
+// Work around webpackbar/ProgressPlugin options schema mismatch in our toolchain.
+// (webpackbar extends ProgressPlugin and overwrites `this.options` with keys like
+// `name`, `color`, `reporters`, which webpack 5 rejects.)
+mix.override((webpackConfig) => {
+    webpackConfig.plugins = (webpackConfig.plugins || []).filter(
+        (plugin) => plugin?.constructor?.name !== 'WebpackBarPlugin'
+    );
+});
