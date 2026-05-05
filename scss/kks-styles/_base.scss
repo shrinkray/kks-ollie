@@ -1,4 +1,3 @@
-@use 'variables' as *;
 @use 'units' as *;
 @use 'hero' as *;
 @use 'scroll2top' as *;
@@ -87,18 +86,18 @@
         justify-content: center;
         padding: 0;
         margin: 0;
-        aspect-ratio: 3/2;
+        aspect-ratio: 1 / 1;
         z-index: 500;
 
         .site--logo {
-            aspect-ratio: 3/2;
+            aspect-ratio: 1 / 1;
             background-repeat: no-repeat;
             background-position-y: bottom;
-            background-image: url('#{$logo}');
+            background-image: url('../images/kks-katz-logo.svg');
             margin: 0 !important;
             padding: 0;
-            width: 160px;
-            height: 107px;
+            width: 10rem;	
+            height: 10rem;
 
             .site--title {
                 color: transparent;
@@ -261,20 +260,24 @@ a:where(:not(.wp-element-button)) {
         margin: 0;
 
         .site--logo {
-            aspect-ratio: 3/2;
+            aspect-ratio: 1 / 1;
             background-repeat: no-repeat;
             background-position-y: bottom;
-            background-image: url('#{$footerLogo}');
+            background-image: url('../images/kks-katz-wh-logo.svg');
             margin: 0 !important;
             padding: 0;
-            width: 250px;
-            height: 167px;
+            width: 160px;
+            height: auto;
 
             .site--title {
                 color: transparent;
                 position: absolute;
                 top: -800px;
             }
+
+			svg {
+				width: 50%;
+			}
         }
     }
 }
