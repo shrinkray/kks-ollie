@@ -7,14 +7,16 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 mix
     // .disableNotifications()
     .sass('scss/kks.scss', 'dist')
-    .postCss('dist/kks.css', 'dist', [
-        require('postcss-preset-env')({
-            stage: 0,
-            features: {
-                'nesting-rules': true,
-            },
-        }),
-    ])
+    .options({
+        postCss: [
+            require('postcss-preset-env')({
+                stage: 0,
+                features: {
+                    'nesting-rules': true,
+                },
+            }),
+        ],
+    })
     .js(['js/kks.js', 'js/motopress.js', 'js/scrolltop.js'], 'dist/kks.js');
 
 mix.webpackConfig({
