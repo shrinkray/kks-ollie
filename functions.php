@@ -72,7 +72,7 @@ function remove_image_title_text( $attr ) {
  * @param object $query The main WordPress query.
  */
 function tg_include_custom_post_types_in_archive_pages( $query ) {
-	if ( $query->is_main_query() && ! is_admin() && ( is_category() || is_tag() && empty( $query->query_vars['suppress_filters'] ) ) ) {
+	if ( $query->is_main_query() && ! is_admin() && ( is_category() || is_tag() ) && empty( $query->query_vars['suppress_filters'] ) ) {
 		$query->set( 'post_type', array( 'teachers', 'case-study' ) );
 	}
 }
