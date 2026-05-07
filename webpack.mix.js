@@ -19,7 +19,7 @@ mix
         ],
     })
     .sass('scss/kks.scss', 'dist')
-    .copy('assets/kks-katz-logo.svg', 'images/kks-katz-logo.svg')
+    // Header logo: edit `images/kks-katz-logo.svg` (do not copy from wh-logo — build used to overwrite it).
     .js(['js/kks.js', 'js/motopress.js', 'js/scrolltop.js'], 'dist/kks.js');
 
 mix.webpackConfig({
@@ -39,8 +39,8 @@ mix.webpackConfig({
 // Work around webpackbar/ProgressPlugin options schema mismatch in our toolchain.
 // (webpackbar extends ProgressPlugin and overwrites `this.options` with keys like
 // `name`, `color`, `reporters`, which webpack 5 rejects.)
-mix.override((webpackConfig) => {
+mix.override(webpackConfig => {
     webpackConfig.plugins = (webpackConfig.plugins || []).filter(
-        (plugin) => plugin?.constructor?.name !== 'WebpackBarPlugin'
+        plugin => plugin?.constructor?.name !== 'WebpackBarPlugin',
     );
 });
