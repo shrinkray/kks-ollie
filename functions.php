@@ -189,9 +189,13 @@ add_filter( 'auth_cookie_expiration', 'kks_extend_session_lifetime' );
 /**
  * Prevent session expiration during active use
  */
-function kks_refresh_session( $user_id ) {
-	if ( $user_id ) {
-		wp_set_auth_cookie( $user_id, true );
+function kks_refresh_session() {
+	if ( is_user_logged_in() ) {
+		$user_id = get_current_user_id();
+
+		if ( $user_id ) {
+			wp_set_auth_cookie( $user_id, true );
+		}
 	}
 }
 add_action( 'wp_ajax_heartbeat', 'kks_refresh_session', 1 );
