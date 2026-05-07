@@ -108,6 +108,11 @@
     }
 }
 
+// Sticky header: keep the same logo sizing as `.header--nav .site--logo` (do not shrink).
+.wp-site-blocks .is-position-sticky .header--nav .logo--container {
+    flex-shrink: 0;
+}
+
 .gw-mm__toggle {
     display: inline-flex;
     align-items: center;
@@ -337,7 +342,7 @@ div[class*='wp-block-'],
         .is-position-sticky {
             position: -webkit-sticky;
             position: sticky;
-            top: -118px;
+            top: -72px;
             z-index: 1200;
         }
     }
@@ -348,7 +353,7 @@ div[class*='wp-block-'],
             .is-position-sticky {
                 position: -webkit-sticky;
                 position: sticky;
-                top: -151px;
+                top: -54px;
                 z-index: 1200;
             }
         }
@@ -363,7 +368,7 @@ div[class*='wp-block-'],
         .is-position-sticky {
             position: -webkit-sticky;
             position: sticky;
-            top: -150px;
+            top: -54px;
             z-index: 1200;
         }
     }
@@ -374,7 +379,7 @@ div[class*='wp-block-'],
             .is-position-sticky {
                 position: -webkit-sticky;
                 position: sticky;
-                top: -180px;
+                top: -65px;
                 z-index: 1200;
             }
         }
@@ -392,7 +397,7 @@ div[class*='wp-block-'],
         .is-position-sticky {
             position: -webkit-sticky;
             position: sticky;
-            top: -212px;
+            top: -76px;
             z-index: 1200;
         }
     }
@@ -403,7 +408,7 @@ div[class*='wp-block-'],
             .is-position-sticky {
                 position: -webkit-sticky;
                 position: sticky;
-                top: -244px;
+                top: -88px;
                 z-index: 1200;
             }
         }
