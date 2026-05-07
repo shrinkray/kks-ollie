@@ -1,23 +1,30 @@
-   <?xml version="1.0"?>
-   <ruleset name="WordPress Theme Coding Standards">
-     <description>A custom set of code standard rules to check for WordPress themes.</description>
+<?xml version="1.0"?>
+<ruleset name="KKS Ollie WordPress theme rules">
+	<description>kks-ollie PHPCS: WordPress-Extra (same as legacy composer flags) plus PHPCompatibility.</description>
 
-     <rule ref="WordPress-Core" />
-     <rule ref="WordPress-Docs" />
-     <rule ref="WordPress-Extra" />
+	<!-- Mirrors prior CLI: skip WordPress.WP.I18n until text domains are audited. -->
+	<rule ref="WordPress.WP.I18n">
+		<severity>0</severity>
+	</rule>
 
-     <rule ref="WordPress.WP.I18n">
-       <properties>
-         <property name="text_domain" type="array" value="your-theme-textdomain"/>
-       </properties>
-     </rule>
+	<!--
+		WPCS 2.x on PHPCS 3.13: WordPress-Extra still references core sniffs PHPCS deprecated.
+		Exclude those and use Generic.WhiteSpace.LanguageConstructSpacing instead of Squiz.*
+	-->
+	<rule ref="WordPress-Extra">
+		<exclude name="Generic.Functions.CallTimePassByReference"/>
+		<exclude name="Squiz.WhiteSpace.LanguageConstructSpacing"/>
+		<exclude name="WordPress.WhiteSpace.PrecisionAlignment"/>
+	</rule>
+	<rule ref="Generic.WhiteSpace.LanguageConstructSpacing"/>
 
-     <rule ref="PHPCompatibility"/>
-     <config name="testVersion" value="7.4-"/>
+	<rule ref="PHPCompatibility"/>
+	<config name="testVersion" value="8.1-"/>
 
-     <arg name="extensions" value="php"/>
-     <file>.</file>
+	<arg name="extensions" value="php"/>
+	<file>.</file>
 
-     <exclude-pattern>/vendor/*</exclude-pattern>
-     <exclude-pattern>/node_modules/*</exclude-pattern>
-   </ruleset>
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+	<exclude-pattern>*/dist/*</exclude-pattern>
+</ruleset>
