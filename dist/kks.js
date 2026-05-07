@@ -198,19 +198,6 @@ __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
 
-/***/ }),
-
-/***/ "./dist/kks.css":
-/*!**********************!*\
-  !*** ./dist/kks.css ***!
-  \**********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
 /***/ })
 
 /******/ 	});
@@ -353,8 +340,7 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 	__webpack_require__.O(undefined, ["dist/kks"], () => (__webpack_require__("./js/kks.js")))
 /******/ 	__webpack_require__.O(undefined, ["dist/kks"], () => (__webpack_require__("./js/motopress.js")))
 /******/ 	__webpack_require__.O(undefined, ["dist/kks"], () => (__webpack_require__("./js/scrolltop.js")))
-/******/ 	__webpack_require__.O(undefined, ["dist/kks"], () => (__webpack_require__("./scss/kks.scss")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["dist/kks"], () => (__webpack_require__("./dist/kks.css")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["dist/kks"], () => (__webpack_require__("./scss/kks.scss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
