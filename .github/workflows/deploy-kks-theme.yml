@@ -6,8 +6,9 @@
 # the repo root is above the theme, copy this workflow to <repo-root>/.github/workflows/
 # or Actions will never run it.
 #
-# `dist/` is tracked in git (optional local fallback / visibility). CI still runs
-# `npm run production` each deploy so rsync uploads the freshly built assets.
+# Build runs `npm run production` each deploy. The rsync step mirrors the **whole theme**
+# directory to the server (PHP, scss, js, templates, changelog, dist/, images/, …), excluding
+# heavy/dev-only paths—so production stays aligned with `main`, not only compiled CSS/JS.
 #
 # --- GitHub Secrets (repository → Settings → Secrets and variables → Actions) ---
 #
@@ -121,10 +122,15 @@ jobs:
           chmod 600 ~/.ssh/known_hosts
           export RSYNC_RSH="ssh -i $KEY_FILE -p $PORT -o StrictHostKeyChecking=yes -o UserKnownHostsFile=~/.ssh/known_hosts"
           TARGET="${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_THEME_PATH}"
-          rsync -avz --mkpath --delete --exclude='.DS_Store' --exclude='manifest.json' ./dist/ "${TARGET}/dist/"
-          if [ -d images ] && compgen -G "images/*" > /dev/null; then
-            rsync -avz --mkpath --delete --exclude='.DS_Store' ./images/ "${TARGET}/images/"
-          else
-            echo "No images/ to sync (directory missing or empty)."
-          fi
+          # Mirror repo theme → server (not only dist/). Excludes keep payload small and avoid
+          # clobbering Composer auth if present only on the server.
+          rsync -avz --mkpath --delete \
+            --exclude='.git/' \
+            --exclude='node_modules/' \
+            --exclude='vendor/' \
+            --exclude='.github/' \
+            --exclude='.DS_Store' \
+            --exclude='manifest.json' \
+            --exclude='auth.json' \
+            ./ "${TARGET}/"
           shred -u "$KEY_FILE" 2>/dev/null || rm -f "$KEY_FILE"
