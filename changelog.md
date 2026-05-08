@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Rename Mix entry files and built assets from `kks` to `koolkatscience`: `scss/koolkatscience.scss`, `js/koolkatscience.js`, `dist/koolkatscience.css` / `dist/koolkatscience.js`; enqueue paths in `functions.php` and CI verify step updated accordingly.
+- GitHub Actions SSH deploy: rsync the **full theme directory** to the server (excluding `.git/`, `node_modules/`, `vendor/`, `.github/`, etc.). Previously only `dist/` and `images/` were synced, so `changelog.md`, `scss/`, `functions.php`, and other sources never updated on production.
 
 ## [1.0.4] - 2026-05-08
 
