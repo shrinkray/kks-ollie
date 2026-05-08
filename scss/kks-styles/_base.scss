@@ -3,6 +3,7 @@
 @use 'scroll2top' as *;
 @use 'events' as *;
 @use 'sass:color';
+@use 'typography' as *;
 
 .visually-hidden {
     position: absolute !important;
@@ -123,9 +124,8 @@
     &.is-mobile {
         &.is-opened {
             .gw-mm__content-wrapper {
-                //background-color: oklab(0.99 -0 0.03);
                 background-color: var(--wp--preset--color--tertiary);
-				padding-block: 5rem;
+			    padding-block: 5rem;
             }
         }
     }
@@ -432,7 +432,7 @@ div[class*='wp-block-'],
                 .gw-mm__content-wrapper {
                     position: initial;
                     max-width: 90vw;
-					padding-block: 0;
+				    padding-block: 0;
                 }
             }
         }
