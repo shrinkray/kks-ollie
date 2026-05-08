@@ -14,9 +14,6 @@
 !.env.example
 auth.json
 
-# ignore all files in the dist directory
-/dist/
-
 # Mac OS X
 .DS_Store
 

@@ -6,8 +6,8 @@
 # the repo root is above the theme, copy this workflow to <repo-root>/.github/workflows/
 # or Actions will never run it.
 #
-# The `dist/` directory is gitignored and is created only by `npm run production` in CI
-# (or locally). You will not see `dist/` in the GitHub file browser after a push.
+# `dist/` is tracked in git (optional local fallback / visibility). CI still runs
+# `npm run production` each deploy so rsync uploads the freshly built assets.
 #
 # --- GitHub Secrets (repository → Settings → Secrets and variables → Actions) ---
 #
