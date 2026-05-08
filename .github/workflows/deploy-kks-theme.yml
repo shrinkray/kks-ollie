@@ -11,6 +11,8 @@
 #   DEPLOY_THEME_PATH      Absolute path on the server to theme root (no trailing slash)
 #                         e.g. /home/user/public_html/wp-content/themes/kks-ollie
 #   DEPLOY_SSH_PRIVATE_KEY Full private key (PEM / OpenSSH) for DEPLOY_USER
+#   DEPLOY_KNOWN_HOSTS     Full known_hosts entry for the deploy host (pin the expected host key)
+#                         e.g. "ssh.example.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI..."
 #
 # Optional:
 #   DEPLOY_SSH_PORT        Port if not 22 (e.g. 2222)
@@ -82,24 +84,27 @@ jobs:
           DEPLOY_THEME_PATH: ${{ secrets.DEPLOY_THEME_PATH }}
           DEPLOY_SSH_PORT: ${{ secrets.DEPLOY_SSH_PORT }}
           DEPLOY_SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
         working-directory: ${{ steps.theme.outputs.theme_path }}
         run: |
           set -euo pipefail
-          if [ -z "${DEPLOY_HOST:-}" ] || [ -z "${DEPLOY_USER:-}" ] || [ -z "${DEPLOY_THEME_PATH:-}" ] || [ -z "${DEPLOY_SSH_PRIVATE_KEY:-}" ]; then
-            echo "::warning::Deploy skipped: add Secrets DEPLOY_HOST, DEPLOY_USER, DEPLOY_THEME_PATH, and DEPLOY_SSH_PRIVATE_KEY."
+          if [ -z "${DEPLOY_HOST:-}" ] || [ -z "${DEPLOY_USER:-}" ] || [ -z "${DEPLOY_THEME_PATH:-}" ] || [ -z "${DEPLOY_SSH_PRIVATE_KEY:-}" ] || [ -z "${DEPLOY_KNOWN_HOSTS:-}" ]; then
+            echo "::warning::Deploy skipped: add Secrets DEPLOY_HOST, DEPLOY_USER, DEPLOY_THEME_PATH, DEPLOY_SSH_PRIVATE_KEY, and DEPLOY_KNOWN_HOSTS."
             exit 0
           fi
           PORT="${DEPLOY_SSH_PORT:-22}"
           mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
           KEY_FILE=~/.ssh/kks_ollie_deploy
           printf '%s\n' "${DEPLOY_SSH_PRIVATE_KEY}" > "$KEY_FILE"
           chmod 600 "$KEY_FILE"
-          ssh-keyscan -p "$PORT" -H "${DEPLOY_HOST}" >> ~/.ssh/known_hosts 2>/dev/null || true
-          export RSYNC_RSH="ssh -i $KEY_FILE -p $PORT -o StrictHostKeyChecking=accept-new"
+          printf '%s\n' "${DEPLOY_KNOWN_HOSTS}" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          export RSYNC_RSH="ssh -i $KEY_FILE -p $PORT -o StrictHostKeyChecking=yes -o UserKnownHostsFile=~/.ssh/known_hosts"
           TARGET="${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_THEME_PATH}"
-          rsync -avz --mkpath ./dist/ "${TARGET}/dist/"
+          rsync -avz --mkpath --delete --exclude='.DS_Store' --exclude='manifest.json' ./dist/ "${TARGET}/dist/"
           if [ -d images ] && compgen -G "images/*" > /dev/null; then
-            rsync -avz --mkpath ./images/ "${TARGET}/images/"
+            rsync -avz --mkpath --delete --exclude='.DS_Store' ./images/ "${TARGET}/images/"
           else
             echo "No images/ to sync (directory missing or empty)."
           fi
