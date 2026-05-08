@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.5] - 2026-05-09
 
+### Fixed
+
+- Remove unused `postcss-subgrid` (it required PostCSS 7.x). That dependency pinned a vulnerable PostCSS 7 install and made Dependabot security updates for `postcss` impossible; the lockfile now dedupes to PostCSS 8.x only.
+
 ### Changed
 
 - Rename Mix entry files and built assets from `kks` to `koolkatscience`: `scss/koolkatscience.scss`, `js/koolkatscience.js`, `dist/koolkatscience.css` / `dist/koolkatscience.js`; enqueue paths in `functions.php` and CI verify step updated accordingly.
