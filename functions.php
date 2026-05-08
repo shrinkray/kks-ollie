@@ -72,7 +72,7 @@ function remove_image_title_text( $attr ) {
  * @param object $query The main WordPress query.
  */
 function tg_include_custom_post_types_in_archive_pages( $query ) {
-	if ( $query->is_main_query() && ! is_admin() && ( is_category() || is_tag() && empty( $query->query_vars['suppress_filters'] ) ) ) {
+	if ( $query->is_main_query() && ! is_admin() && ( is_category() || is_tag() ) && empty( $query->query_vars['suppress_filters'] ) ) {
 		$query->set( 'post_type', array( 'teachers', 'case-study' ) );
 	}
 }
@@ -189,9 +189,13 @@ add_filter( 'auth_cookie_expiration', 'kks_extend_session_lifetime' );
 /**
  * Prevent session expiration during active use
  */
-function kks_refresh_session( $user_id ) {
-	if ( $user_id ) {
-		wp_set_auth_cookie( $user_id, true );
+function kks_refresh_session() {
+	if ( is_user_logged_in() ) {
+		$user_id = get_current_user_id();
+
+		if ( $user_id ) {
+			wp_set_auth_cookie( $user_id, true );
+		}
 	}
 }
 add_action( 'wp_ajax_heartbeat', 'kks_refresh_session', 1 );
