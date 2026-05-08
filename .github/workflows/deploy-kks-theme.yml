@@ -2,6 +2,12 @@
 #
 # Lives under this theme folder — intended for a repo whose ROOT is kks-ollie.
 # GitHub only loads workflows from /.github/workflows at repository root.
+# If this file lives in a subfolder of your remote (e.g. full WordPress tree) but
+# the repo root is above the theme, copy this workflow to <repo-root>/.github/workflows/
+# or Actions will never run it.
+#
+# The `dist/` directory is gitignored and is created only by `npm run production` in CI
+# (or locally). You will not see `dist/` in the GitHub file browser after a push.
 #
 # --- GitHub Secrets (repository → Settings → Secrets and variables → Actions) ---
 #
@@ -69,13 +75,25 @@ jobs:
 
       - name: npm ci && production build
         working-directory: ${{ steps.theme.outputs.theme_path }}
-        run: npm ci && npm run production
+        env:
+          CI: true
+          NODE_ENV: production
+        run: npm ci --no-audit --no-fund && npm run production
 
       - name: Verify artifacts
         working-directory: ${{ steps.theme.outputs.theme_path }}
         run: |
-          test -f dist/kks.css
-          test -f dist/kks.js
+          echo "Contents of dist/ after build:"
+          ls -la dist || true
+          test -f dist/kks.css || { echo "Missing dist/kks.css — check webpack.mix.js and build logs above." >&2; exit 1; }
+          test -f dist/kks.js || { echo "Missing dist/kks.js — check webpack.mix.js and build logs above." >&2; exit 1; }
+
+      - name: Upload dist artifact (for debugging)
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-${{ github.sha }}
+          path: ${{ steps.theme.outputs.theme_path }}/dist/
+          if-no-files-found: error
 
       - name: Deploy dist/ and images/ via rsync
         env:
