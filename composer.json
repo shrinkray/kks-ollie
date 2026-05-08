@@ -25,9 +25,8 @@
 	},
 	"scripts": {
 		"lint": "@php ./vendor/bin/parallel-lint --exclude .git --exclude vendor .",
-		"wpcs:scan": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs --ignore=*/vendor/* --standard=WordPress-Extra .",		
-		"wpcs:fix": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcbf --ignore=*/vendor/* --standard=WordPress-Extra ."
-		
+		"wpcs:scan": "@php -d memory_limit=1024M -d error_reporting=E_ALL\\&~E_DEPRECATED\\&~E_USER_DEPRECATED ./vendor/bin/phpcs --standard=phpcs.xml",
+		"wpcs:fix": "@php -d memory_limit=1024M -d error_reporting=E_ALL\\&~E_DEPRECATED\\&~E_USER_DEPRECATED ./vendor/bin/phpcbf --standard=phpcs.xml"
 	},
 	"config": {
 		"allow-plugins": {

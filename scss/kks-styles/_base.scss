@@ -1,4 +1,3 @@
-@use 'variables' as *;
 @use 'units' as *;
 @use 'hero' as *;
 @use 'scroll2top' as *;
@@ -87,18 +86,18 @@
         justify-content: center;
         padding: 0;
         margin: 0;
-        aspect-ratio: 3/2;
+        aspect-ratio: 1 / 1;
         z-index: 500;
 
         .site--logo {
-            aspect-ratio: 3/2;
+            aspect-ratio: 1 / 1;
             background-repeat: no-repeat;
             background-position-y: bottom;
-            background-image: url('#{$logo}');
+            background-image: url('../images/kks-katz-logo.svg');
             margin: 0 !important;
             padding: 0;
-            width: 160px;
-            height: 107px;
+            width: 10rem;
+            height: 10rem;
 
             .site--title {
                 color: transparent;
@@ -107,6 +106,11 @@
             }
         }
     }
+}
+
+// Sticky header: keep the same logo sizing as `.header--nav .site--logo` (do not shrink).
+.wp-site-blocks .is-position-sticky .header--nav .logo--container {
+    flex-shrink: 0;
 }
 
 .gw-mm__toggle {
@@ -261,19 +265,23 @@ a:where(:not(.wp-element-button)) {
         margin: 0;
 
         .site--logo {
-            aspect-ratio: 3/2;
+            aspect-ratio: 1 / 1;
             background-repeat: no-repeat;
             background-position-y: bottom;
-            background-image: url('#{$footerLogo}');
+            background-image: url('../images/kks-katz-wh-logo.svg');
             margin: 0 !important;
             padding: 0;
-            width: 250px;
-            height: 167px;
+            width: 160px;
+            height: auto;
 
             .site--title {
                 color: transparent;
                 position: absolute;
                 top: -800px;
+            }
+
+            svg {
+                width: 50%;
             }
         }
     }
@@ -334,7 +342,7 @@ div[class*='wp-block-'],
         .is-position-sticky {
             position: -webkit-sticky;
             position: sticky;
-            top: -118px;
+            top: -72px;
             z-index: 1200;
         }
     }
@@ -345,7 +353,7 @@ div[class*='wp-block-'],
             .is-position-sticky {
                 position: -webkit-sticky;
                 position: sticky;
-                top: -151px;
+                top: -54px;
                 z-index: 1200;
             }
         }
@@ -360,7 +368,7 @@ div[class*='wp-block-'],
         .is-position-sticky {
             position: -webkit-sticky;
             position: sticky;
-            top: -150px;
+            top: -54px;
             z-index: 1200;
         }
     }
@@ -371,7 +379,7 @@ div[class*='wp-block-'],
             .is-position-sticky {
                 position: -webkit-sticky;
                 position: sticky;
-                top: -180px;
+                top: -65px;
                 z-index: 1200;
             }
         }
@@ -389,7 +397,7 @@ div[class*='wp-block-'],
         .is-position-sticky {
             position: -webkit-sticky;
             position: sticky;
-            top: -212px;
+            top: -76px;
             z-index: 1200;
         }
     }
@@ -400,7 +408,7 @@ div[class*='wp-block-'],
             .is-position-sticky {
                 position: -webkit-sticky;
                 position: sticky;
-                top: -244px;
+                top: -88px;
                 z-index: 1200;
             }
         }
