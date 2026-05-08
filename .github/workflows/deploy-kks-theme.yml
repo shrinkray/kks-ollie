@@ -77,7 +77,8 @@ jobs:
         working-directory: ${{ steps.theme.outputs.theme_path }}
         env:
           CI: true
-          NODE_ENV: production
+          # Omit NODE_ENV=production during npm ci: npm would skip devDependencies
+          # (laravel-mix, webpack, sass, …), leaving `mix` missing → exit 127.
         run: npm ci --no-audit --no-fund && npm run production
 
       - name: Verify artifacts
