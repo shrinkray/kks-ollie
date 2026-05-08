@@ -1,0 +1,111 @@
+# Build kks-ollie on pushes to main, then rsync compiled assets to hosting.
+#
+# Lives under this theme folder — intended for a repo whose ROOT is kks-ollie.
+# GitHub only loads workflows from /.github/workflows at repository root.
+#
+# --- GitHub Secrets (repository → Settings → Secrets and variables → Actions) ---
+#
+# Required to actually deploy:
+#   DEPLOY_HOST            SSH hostname, e.g. ssh.yourhost.com
+#   DEPLOY_USER            SSH login user
+#   DEPLOY_THEME_PATH      Absolute path on the server to theme root (no trailing slash)
+#                         e.g. /home/user/public_html/wp-content/themes/kks-ollie
+#   DEPLOY_SSH_PRIVATE_KEY Full private key (PEM / OpenSSH) for DEPLOY_USER
+#   DEPLOY_KNOWN_HOSTS     Full known_hosts entry for the deploy host (pin the expected host key)
+#                         e.g. "ssh.example.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI..."
+#
+# Optional:
+#   DEPLOY_SSH_PORT        Port if not 22 (e.g. 2222)
+#
+# --- GitHub Variables (same page, “Variables” tab), optional ---
+#
+#   THEME_PATH             Defaults to "." (repo root). Set only if this workflow file is checked out
+#                         from a monorepo and package.json lives under another path.
+
+name: Deploy kks-ollie (build + rsync)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-kks-ollie
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: '22'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Resolve theme directory
+        id: theme
+        run: |
+          if [ -n "${{ vars.THEME_PATH }}" ]; then
+            TP="${{ vars.THEME_PATH }}"
+          else
+            TP="."
+          fi
+          if [ ! -f "$TP/package.json" ]; then
+            echo "Expected theme at '$TP'; set Actions variable THEME_PATH to the folder containing package.json." >&2
+            exit 1
+          fi
+          echo "theme_path=$TP" >> "$GITHUB_OUTPUT"
+          echo "theme_path=$TP" >> "$GITHUB_ENV"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: ${{ steps.theme.outputs.theme_path }}/package-lock.json
+
+      - name: npm ci && production build
+        working-directory: ${{ steps.theme.outputs.theme_path }}
+        run: npm ci && npm run production
+
+      - name: Verify artifacts
+        working-directory: ${{ steps.theme.outputs.theme_path }}
+        run: |
+          test -f dist/kks.css
+          test -f dist/kks.js
+
+      - name: Deploy dist/ and images/ via rsync
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_THEME_PATH: ${{ secrets.DEPLOY_THEME_PATH }}
+          DEPLOY_SSH_PORT: ${{ secrets.DEPLOY_SSH_PORT }}
+          DEPLOY_SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        working-directory: ${{ steps.theme.outputs.theme_path }}
+        run: |
+          set -euo pipefail
+          if [ -z "${DEPLOY_HOST:-}" ] || [ -z "${DEPLOY_USER:-}" ] || [ -z "${DEPLOY_THEME_PATH:-}" ] || [ -z "${DEPLOY_SSH_PRIVATE_KEY:-}" ] || [ -z "${DEPLOY_KNOWN_HOSTS:-}" ]; then
+            echo "::warning::Deploy skipped: add Secrets DEPLOY_HOST, DEPLOY_USER, DEPLOY_THEME_PATH, DEPLOY_SSH_PRIVATE_KEY, and DEPLOY_KNOWN_HOSTS."
+            exit 0
+          fi
+          PORT="${DEPLOY_SSH_PORT:-22}"
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          KEY_FILE=~/.ssh/kks_ollie_deploy
+          printf '%s\n' "${DEPLOY_SSH_PRIVATE_KEY}" > "$KEY_FILE"
+          chmod 600 "$KEY_FILE"
+          printf '%s\n' "${DEPLOY_KNOWN_HOSTS}" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          export RSYNC_RSH="ssh -i $KEY_FILE -p $PORT -o StrictHostKeyChecking=yes -o UserKnownHostsFile=~/.ssh/known_hosts"
+          TARGET="${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_THEME_PATH}"
+          rsync -avz --mkpath --delete --exclude='.DS_Store' --exclude='manifest.json' ./dist/ "${TARGET}/dist/"
+          if [ -d images ] && compgen -G "images/*" > /dev/null; then
+            rsync -avz --mkpath --delete --exclude='.DS_Store' ./images/ "${TARGET}/images/"
+          else
+            echo "No images/ to sync (directory missing or empty)."
+          fi
+          shred -u "$KEY_FILE" 2>/dev/null || rm -f "$KEY_FILE"

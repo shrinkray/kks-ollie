@@ -13,3 +13,20 @@
 .env.*
 !.env.example
 auth.json
+
+# ignore all files in the dist directory
+/dist/
+
+# Mac OS X
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# Linux
+.directory
+
+# Other
+.gitignore
+.gitignore
