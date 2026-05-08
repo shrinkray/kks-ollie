@@ -14,7 +14,7 @@ add_action( 'init', 'plugin_prefix_unregister_post_type' );
 
 add_action( 'wp_enqueue_scripts', 'kks_enqueue_styles', 20 );
 function kks_enqueue_styles() {
-	$css_rel_path = '/dist/kks.css';
+	$css_rel_path = '/dist/koolkatscience.css';
 	$css_abs_path = get_stylesheet_directory() . $css_rel_path;
 	$css_ver      = file_exists( $css_abs_path ) ? filemtime( $css_abs_path ) : wp_get_theme()->get( 'Version' );
 	wp_enqueue_style(
@@ -26,7 +26,7 @@ function kks_enqueue_styles() {
 }
 // Enqueue custom javascript and load last
 function kks_enqueue_scripts() {
-	$js_rel_path = '/dist/kks.js';
+	$js_rel_path = '/dist/koolkatscience.js';
 	$js_abs_path = get_stylesheet_directory() . $js_rel_path;
 	$js_ver      = file_exists( $js_abs_path ) ? filemtime( $js_abs_path ) : wp_get_theme()->get( 'Version' );
 	wp_enqueue_script( 'kks-custom-js', get_stylesheet_directory_uri() . $js_rel_path, array(), $js_ver, true );

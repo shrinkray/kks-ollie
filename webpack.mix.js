@@ -6,7 +6,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 mix
     // .disableNotifications()
-    // Keep url() verbatim so paths stay relative to dist/kks.css — WordPress is not hosted at /
+    // Keep url() verbatim so paths stay relative to dist/koolkatscience.css — WordPress is not hosted at /
     .options({
         processCssUrls: false,
         postCss: [
@@ -18,9 +18,9 @@ mix
             }),
         ],
     })
-    .sass('scss/kks.scss', 'dist')
+    .sass('scss/koolkatscience.scss', 'dist')
     // Header logo: edit `images/kks-katz-logo.svg` (do not copy from wh-logo — build used to overwrite it).
-    .js(['js/kks.js', 'js/motopress.js', 'js/scrolltop.js'], 'dist/kks.js');
+    .js(['js/koolkatscience.js', 'js/motopress.js', 'js/scrolltop.js'], 'dist/koolkatscience.js');
 
 mix.webpackConfig({
     stats: 'normal', // verbose, normal, minimal, none
@@ -31,7 +31,7 @@ mix.webpackConfig({
             verbose: false,
             cleanStaleWebpackAssets: true,
             protectWebpackAssets: false,
-            cleanOnceBeforeBuildPatterns: ['dist/kks.css', 'dist/kks.js'],
+            cleanOnceBeforeBuildPatterns: ['dist/koolkatscience.css', 'dist/koolkatscience.js'],
         }),
     ],
 });

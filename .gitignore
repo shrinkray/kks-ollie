@@ -14,9 +14,6 @@
 !.env.example
 auth.json
 
-# ignore all files in the dist directory
-/dist/
-
 # Mac OS X
 .DS_Store
 
@@ -27,6 +24,6 @@ ehthumbs.db
 # Linux
 .directory
 
-# Other
-.gitignore
-.gitignore
+# dist/ is committed (built assets). If files never show under Source Control:
+#   1) Open this theme folder as the repo root (kks-ollie), not the whole Local/site tree.
+#   2) Run: git check-ignore -v dist/koolkatscience.css — if matched, relax ~/.gitignore_global or use git add -f dist/
