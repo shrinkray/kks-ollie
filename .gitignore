@@ -24,6 +24,6 @@ ehthumbs.db
 # Linux
 .directory
 
-# Other
-.gitignore
-.gitignore
+# dist/ is committed (built assets). If files never show under Source Control:
+#   1) Open this theme folder as the repo root (kks-ollie), not the whole Local/site tree.
+#   2) Run: git check-ignore -v dist/kks.css — if matched, relax ~/.gitignore_global or use git add -f dist/
