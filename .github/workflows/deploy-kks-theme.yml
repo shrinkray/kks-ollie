@@ -86,8 +86,8 @@ jobs:
         run: |
           echo "Contents of dist/ after build:"
           ls -la dist || true
-          test -f dist/kks.css || { echo "Missing dist/kks.css — check webpack.mix.js and build logs above." >&2; exit 1; }
-          test -f dist/kks.js || { echo "Missing dist/kks.js — check webpack.mix.js and build logs above." >&2; exit 1; }
+          test -f dist/koolkatscience.css || { echo "Missing dist/koolkatscience.css — check webpack.mix.js and build logs above." >&2; exit 1; }
+          test -f dist/koolkatscience.js || { echo "Missing dist/koolkatscience.js — check webpack.mix.js and build logs above." >&2; exit 1; }
 
       - name: Upload dist artifact (for debugging)
         uses: actions/upload-artifact@v4
