@@ -27,10 +27,12 @@
 main {
 
 	@media screen and (max-width: 781px) {
-		
-		.what-is-stem-group {
-				margin-top: 16rem !important;
-			}
-	}
+		.awards-group {
+			margin-top: 12rem;
+		}
 
+		.awards-group + .what-is-stem-group {
+			margin-top: 0;
+		}
+	}
 }

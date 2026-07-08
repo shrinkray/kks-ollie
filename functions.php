@@ -187,15 +187,35 @@ function kks_extend_session_lifetime( $lifetime ) {
 add_filter( 'auth_cookie_expiration', 'kks_extend_session_lifetime' );
 
 /**
- * Prevent session expiration during active use
+ * Extend the auth cookie without rotating the session token.
+ *
+ * Rotating the token (calling wp_set_auth_cookie without the current token)
+ * invalidates WordPress nonces — which breaks WP Migrate DB Pro mid-migration.
  */
 function kks_refresh_session() {
-	if ( is_user_logged_in() ) {
-		$user_id = get_current_user_id();
-
-		if ( $user_id ) {
-			wp_set_auth_cookie( $user_id, true );
-		}
+	if ( ! is_user_logged_in() ) {
+		return;
 	}
+
+	$user_id = get_current_user_id();
+	$token   = wp_get_session_token();
+
+	if ( ! $user_id || ! $token ) {
+		return;
+	}
+
+	wp_set_auth_cookie( $user_id, true, '', $token );
 }
 add_action( 'wp_ajax_heartbeat', 'kks_refresh_session', 1 );
+
+
+add_filter(
+	'jwt_auth_whitelist',
+	function ( $endpoints ) {
+		$wp_migrate_db_pro_endpoints = array(
+			'/wp-json/mdb-api/v1/*',
+		);
+
+		return array_unique( array_merge( $endpoints, $wp_migrate_db_pro_endpoints ) );
+	}
+);
