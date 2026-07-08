@@ -97,7 +97,27 @@ jobs:
           path: ${{ steps.theme.outputs.theme_path }}/dist/
           if-no-files-found: error
 
-      - name: Deploy dist/ and images/ via rsync
+      - name: Check deploy secrets
+        id: deploy_ready
+        run: |
+          set -euo pipefail
+          missing=()
+          [ -z "${{ secrets.DEPLOY_HOST }}" ] && missing+=("DEPLOY_HOST")
+          [ -z "${{ secrets.DEPLOY_USER }}" ] && missing+=("DEPLOY_USER")
+          [ -z "${{ secrets.DEPLOY_THEME_PATH }}" ] && missing+=("DEPLOY_THEME_PATH")
+          [ -z "${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}" ] && missing+=("DEPLOY_SSH_PRIVATE_KEY")
+          [ -z "${{ secrets.DEPLOY_KNOWN_HOSTS }}" ] && missing+=("DEPLOY_KNOWN_HOSTS")
+          if [ "${#missing[@]}" -gt 0 ]; then
+            echo "::error::Deploy cannot run. Missing repository secrets: ${missing[*]}"
+            echo "Add them under Settings → Secrets and variables → Actions → Secrets (repository secrets, not only environment)."
+            echo "deploy_ready=false" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+          echo "All required deploy secrets are set."
+          echo "deploy_ready=true" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy theme to server via rsync
+        if: steps.deploy_ready.outputs.deploy_ready == 'true'
         env:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
@@ -108,10 +128,6 @@ jobs:
         working-directory: ${{ steps.theme.outputs.theme_path }}
         run: |
           set -euo pipefail
-          if [ -z "${DEPLOY_HOST:-}" ] || [ -z "${DEPLOY_USER:-}" ] || [ -z "${DEPLOY_THEME_PATH:-}" ] || [ -z "${DEPLOY_SSH_PRIVATE_KEY:-}" ] || [ -z "${DEPLOY_KNOWN_HOSTS:-}" ]; then
-            echo "::warning::Deploy skipped: add Secrets DEPLOY_HOST, DEPLOY_USER, DEPLOY_THEME_PATH, DEPLOY_SSH_PRIVATE_KEY, and DEPLOY_KNOWN_HOSTS."
-            exit 0
-          fi
           PORT="${DEPLOY_SSH_PORT:-22}"
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
