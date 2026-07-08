@@ -212,6 +212,8 @@ add_action( 'wp_ajax_heartbeat', 'kks_refresh_session', 1 );
 add_filter(
 	'jwt_auth_whitelist',
 	function ( $endpoints ) {
+		$endpoints = is_array( $endpoints ) ? $endpoints : array();
+
 		$wp_migrate_db_pro_endpoints = array(
 			'/wp-json/mdb-api/v1/*',
 		);
