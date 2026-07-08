@@ -1,0 +1,12 @@
+diff --git a/node_modules/laravel-mix/src/config.js b/node_modules/laravel-mix/src/config.js
+index e9b2ad0..6cc938a 100644
+--- a/node_modules/laravel-mix/src/config.js
++++ b/node_modules/laravel-mix/src/config.js
+@@ -1,6 +1,6 @@
+ // @ts-check
+ 
+-const yargs = require('yargs/yargs');
++const yargs = require('yargs');
+ 
+ /** @typedef {import("@babel/core").TransformOptions} BabelConfig */
+ 
