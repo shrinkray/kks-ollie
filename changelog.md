@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Remove unused `postcss-subgrid` (it required PostCSS 7.x). That dependency pinned a vulnerable PostCSS 7 install and made Dependabot security updates for `postcss` impossible; the lockfile now dedupes to PostCSS 8.x only.
+- Harden `jwt_auth_whitelist` filter handling by normalizing `$endpoints` to an array before `array_merge()` (prevents PHP 8+ `TypeError` if another filter returns `null`).
 
 ### Changed
 
