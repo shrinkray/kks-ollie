@@ -73,4 +73,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Meta Pixel host check now normalizes the site host (lowercase, strips a leading `www.`) before comparing, so it also fires on `www.koolkatscience.org` instead of silently skipping it.
 - Meta Pixel host check now reads the actual request `Host` header instead of WordPress's DB-configured `home` option, so a staging/preview clone of the production database no longer fires the real production Pixel.
 
+### Security
+
+- Bump `wp-coding-standards/wpcs` 2.3.0 → 3.4.1 (fixes CVE-2026-45293, arbitrary code execution), which pulled in `squizlabs/php_codesniffer` 3.13.6 (fixes CVE-2026-67434, OS command injection) as a transitive dependency. Required removing `wptrt/wpthemereview`, an unused dev dependency (`phpcs.xml` never references its `WPThemeReview` ruleset) that pinned WPCS to `^2.2.0` and has no release compatible with WPCS 3.x.
+- `phpcs.xml`: drop the `WordPress.WhiteSpace.PrecisionAlignment` exclude — WPCS 3.x removed that sniff outright, so excluding it is now a phpcs config error.
+- `functions.php`: drop the unused `$lifetime` parameter from `kks_extend_session_lifetime()`, flagged by a new WPCS 3.x sniff (the WP hook still calls it fine with fewer declared params).
+- npm audit: 38 → 22 vulnerabilities (0 critical, was 2). Bumped `shell-quote` (critical), `websocket-driver` (critical), `postcss` + its `nanoid` dependency (high), `svgo` (high), `ws` (high), `postcss-selector-parser` (high), and `express`/`body-parser`/`qs` (partial — see below), plus routine transitive bumps (`fast-uri`, `brace-expansion`, `js-yaml`, `immutable`, `launch-editor`) picked up along the way. All dev-only build tooling, never shipped to the site; ran `npm run production` after each step and confirmed the build succeeded with no changes to `dist/` output.
+
+### Known remaining (deferred — needs a breaking-change pass, not bundled here)
+
+- `qs` DoS (moderate): stuck at 6.15.3, the newest patch `express`'s declared `~6.15.1` range allows; the advisory covers the entire 6.15.x line. Needs `express` 5.x or a version override.
+- `webpack` SSRF (low): fix (5.110.3) is outside the `5.94.0` pinned in `package.json` — needs a tested Laravel Mix build verification, not an automatic bump.
+- `@typescript-eslint/*` chain nested under `@wordpress/eslint-plugin`, and a nested `minimatch`: blocked on `@wordpress/eslint-plugin`'s own pinned versions.
+- `uuid`, and the `sockjs`/`node-notifier`/`webpack-dev-server` chain that depends on it: no upstream fix published yet.
+- `laravel-mix`/`laravel-mix-purgecss` and the old `browserify-sign`/`create-ecdh`/`crypto-browserify`/`elliptic`/`node-libs-browser` polyfill chain they pull in: no fix available upstream.
+
 - This theme is a custom modification of the Ollie theme (v1.2.5).

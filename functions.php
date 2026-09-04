@@ -227,7 +227,7 @@ add_filter( 'heartbeat_settings', 'kks_heartbeat_settings' );
 /**
  * Extend session lifetime
  */
-function kks_extend_session_lifetime( $lifetime ) {
+function kks_extend_session_lifetime() {
 	// Extend session lifetime to 24 hours (default is 2 hours)
 	return 86400;
 }

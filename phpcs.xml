@@ -8,13 +8,14 @@
 	</rule>
 
 	<!--
-		WPCS 2.x on PHPCS 3.13: WordPress-Extra still references core sniffs PHPCS deprecated.
+		WordPress-Extra still references core sniffs PHPCS deprecated.
 		Exclude those and use Generic.WhiteSpace.LanguageConstructSpacing instead of Squiz.*
+		WPCS 3.x removed WordPress.WhiteSpace.PrecisionAlignment outright, so it's no
+		longer excluded here (excluding a nonexistent sniff is a phpcs config error).
 	-->
 	<rule ref="WordPress-Extra">
 		<exclude name="Generic.Functions.CallTimePassByReference"/>
 		<exclude name="Squiz.WhiteSpace.LanguageConstructSpacing"/>
-		<exclude name="WordPress.WhiteSpace.PrecisionAlignment"/>
 	</rule>
 	<rule ref="Generic.WhiteSpace.LanguageConstructSpacing"/>
 

@@ -6,6 +6,8 @@ The KKS Ollie theme works out of the box and intended to modify the parent, Olli
 - `composer run wpcs:scan`
 - `composer run wpcs:fix`
 
+Linting requires PHP >= 8.1 with the `filter`, `libxml`, `tokenizer`, and `xmlreader` extensions (needed by `wp-coding-standards/wpcs` 3.x). If `composer install` fails on a missing extension, install it via your OS package manager (e.g. `apt install php-xml`) or enable it in `php.ini`.
+
 Write custom SCSS and manage code styling using Prettier and Laravel Mix. 
 
 - `npx mix` 
