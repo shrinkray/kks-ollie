@@ -128,10 +128,12 @@ the_post_thumbnail( 'post-featured-full' );
 // Add Facebook Pixel to site per KKS request 3/4/2024
 
 function js_hook_scripts() {
-	// Get the site host, normalized (lowercase, no leading 'www.') so
+	// Get the actual request host (not the DB-configured 'home' option) so a
+	// staging/preview clone of the production database doesn't also fire the
+	// production Pixel. Normalized (lowercase, no port, no leading 'www.') so
 	// 'www.koolkatscience.org' matches the same as 'koolkatscience.org'.
-	$site_host = wp_parse_url( get_bloginfo( 'url' ), PHP_URL_HOST );
-	$site_host = is_string( $site_host ) ? strtolower( $site_host ) : '';
+	$site_host = isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : '';
+	$site_host = strtolower( strtok( $site_host, ':' ) );
 	if ( 0 === strpos( $site_host, 'www.' ) ) {
 		$site_host = substr( $site_host, 4 );
 	}

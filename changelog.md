@@ -71,5 +71,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Meta Pixel host check now normalizes the site host (lowercase, strips a leading `www.`) before comparing, so it also fires on `www.koolkatscience.org` instead of silently skipping it.
+- Meta Pixel host check now reads the actual request `Host` header instead of WordPress's DB-configured `home` option, so a staging/preview clone of the production database no longer fires the real production Pixel.
 
 - This theme is a custom modification of the Ollie theme (v1.2.5).
