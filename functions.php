@@ -133,6 +133,12 @@ function js_hook_scripts() {
 
 	// Check if the site URL is exactly 'koolkatscience.net'
 	if ( 'koolkatscience.net' === $site_url ) {
+		// Meta Pixel account ID, configurable via the KKS_META_PIXEL_ID env var
+		// (falls back to the existing production pixel if unset).
+		$meta_pixel_id = getenv( 'KKS_META_PIXEL_ID' );
+		if ( ! $meta_pixel_id ) {
+			$meta_pixel_id = '5582662448427098';
+		}
 		?>
 		<!-- Meta Pixel Code -->
 		<!-- Meta Pixel Code -->
@@ -145,7 +151,7 @@ function js_hook_scripts() {
 		t.src=v;s=b.getElementsByTagName(e)[0];
 		s.parentNode.insertBefore(t,s)}(window, document,'script',
 		'https://connect.facebook.net/en_US/fbevents.js');
-		fbq('init', '5582662448427098');
+		fbq('init', '<?php echo esc_js( $meta_pixel_id ); ?>');
 		fbq('track', 'PageView');
 		</script>
 		<noscript><img height="1" width="1" style="display:none"
