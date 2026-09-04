@@ -59,6 +59,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Enqueue the Givebutter donation widget script sitewide, gated on the `KKS_GIVEBUTTER_ACCOUNT_ID` environment variable (renders nothing until that's set).
+
 ### Changed
 
 - Move the Meta Pixel account ID out of `functions.php` and into the `KKS_META_PIXEL_ID` environment variable, falling back to the existing production pixel ID if the env var isn't set.

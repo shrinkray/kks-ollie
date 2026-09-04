@@ -169,6 +169,40 @@ function js_hook_scripts() {
 
 add_action( 'wp_head', 'js_hook_scripts' );
 
+// Add Givebutter donation widget script; account ID comes from the
+// KKS_GIVEBUTTER_ACCOUNT_ID env var, so it renders nothing until that's set.
+add_action(
+	'wp_enqueue_scripts',
+	function () {
+		$givebutter_account_id = getenv( 'KKS_GIVEBUTTER_ACCOUNT_ID' );
+
+		if ( ! $givebutter_account_id ) {
+			return;
+		}
+
+		wp_enqueue_script(
+			'givebutter-widget',
+			add_query_arg( 'acct', $givebutter_account_id, 'https://widgets.givebutter.com/latest.umd.cjs' ),
+			array(),
+			wp_get_theme()->get( 'Version' ),
+			false
+		);
+	}
+);
+
+// Load the Givebutter widget script asynchronously.
+add_filter(
+	'script_loader_tag',
+	function ( $tag, $handle ) {
+		if ( 'givebutter-widget' === $handle ) {
+			$tag = str_replace( ' src', ' async src', $tag );
+		}
+		return $tag;
+	},
+	10,
+	2
+);
+
 /**
  * Adjust WordPress heartbeat settings
  */
