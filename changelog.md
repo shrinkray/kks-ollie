@@ -73,4 +73,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Meta Pixel host check now normalizes the site host (lowercase, strips a leading `www.`) before comparing, so it also fires on `www.koolkatscience.org` instead of silently skipping it.
 - Meta Pixel host check now reads the actual request `Host` header instead of WordPress's DB-configured `home` option, so a staging/preview clone of the production database no longer fires the real production Pixel.
 
+### Security
+
+- Bump `wp-coding-standards/wpcs` 2.3.0 → 3.4.1 (fixes CVE-2026-45293, arbitrary code execution), which pulled in `squizlabs/php_codesniffer` 3.13.6 (fixes CVE-2026-67434, OS command injection) as a transitive dependency. Required removing `wptrt/wpthemereview`, an unused dev dependency (`phpcs.xml` never references its `WPThemeReview` ruleset) that pinned WPCS to `^2.2.0` and has no release compatible with WPCS 3.x.
+- `phpcs.xml`: drop the `WordPress.WhiteSpace.PrecisionAlignment` exclude — WPCS 3.x removed that sniff outright, so excluding it is now a phpcs config error.
+- `functions.php`: drop the unused `$lifetime` parameter from `kks_extend_session_lifetime()`, flagged by a new WPCS 3.x sniff (the WP hook still calls it fine with fewer declared params).
+
 - This theme is a custom modification of the Ollie theme (v1.2.5).
