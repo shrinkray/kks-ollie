@@ -131,8 +131,8 @@ function js_hook_scripts() {
 	// Get the site URL
 	$site_url = wp_parse_url( get_bloginfo( 'url' ), PHP_URL_HOST );
 
-	// Check if the site URL is exactly 'koolkatscience.net'
-	if ( 'koolkatscience.net' === $site_url ) {
+	// Check if the site URL is 'koolkatscience.org' (or the legacy 'koolkatscience.net')
+	if ( in_array( $site_url, array( 'koolkatscience.org', 'koolkatscience.net' ), true ) ) {
 		// Meta Pixel account ID, configurable via the KKS_META_PIXEL_ID env var
 		// (falls back to the existing production pixel if unset).
 		$meta_pixel_id = getenv( 'KKS_META_PIXEL_ID' );
@@ -161,8 +161,8 @@ function js_hook_scripts() {
 		<!-- End Meta Pixel Code -->
 		<?php
 	} else {
-		// If the site URL is not 'koolkatscience.net', do nothing
-		echo '<!-- Site URL is not koolkatscience.net -->';
+		// If the site URL doesn't match, do nothing
+		echo '<!-- Site URL is not koolkatscience.org/.net -->';
 		return;
 	}
 }
