@@ -59,4 +59,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Enqueue the Givebutter donation widget script sitewide, gated on the `KKS_GIVEBUTTER_ACCOUNT_ID` environment variable (renders nothing until that's set).
+
+### Changed
+
+- Move the Meta Pixel account ID out of `functions.php` and into the `KKS_META_PIXEL_ID` environment variable, falling back to the existing production pixel ID if the env var isn't set.
+- Meta Pixel now also fires on `koolkatscience.org` (in addition to the legacy `koolkatscience.net`), since the site is publishing to the `.org` domain.
+
+### Fixed
+
+- Meta Pixel host check now normalizes the site host (lowercase, strips a leading `www.`) before comparing, so it also fires on `www.koolkatscience.org` instead of silently skipping it.
+- Meta Pixel host check now reads the actual request `Host` header instead of WordPress's DB-configured `home` option, so a staging/preview clone of the production database no longer fires the real production Pixel.
+
 - This theme is a custom modification of the Ollie theme (v1.2.5).

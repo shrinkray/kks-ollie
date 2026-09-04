@@ -128,11 +128,24 @@ the_post_thumbnail( 'post-featured-full' );
 // Add Facebook Pixel to site per KKS request 3/4/2024
 
 function js_hook_scripts() {
-	// Get the site URL
-	$site_url = wp_parse_url( get_bloginfo( 'url' ), PHP_URL_HOST );
+	// Get the actual request host (not the DB-configured 'home' option) so a
+	// staging/preview clone of the production database doesn't also fire the
+	// production Pixel. Normalized (lowercase, no port, no leading 'www.') so
+	// 'www.koolkatscience.org' matches the same as 'koolkatscience.org'.
+	$site_host = isset( $_SERVER['HTTP_HOST'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : '';
+	$site_host = strtolower( strtok( $site_host, ':' ) );
+	if ( 0 === strpos( $site_host, 'www.' ) ) {
+		$site_host = substr( $site_host, 4 );
+	}
 
-	// Check if the site URL is exactly 'koolkatscience.net'
-	if ( 'koolkatscience.net' === $site_url ) {
+	// Check if the site host is 'koolkatscience.org' (or the legacy 'koolkatscience.net')
+	if ( in_array( $site_host, array( 'koolkatscience.org', 'koolkatscience.net' ), true ) ) {
+		// Meta Pixel account ID, configurable via the KKS_META_PIXEL_ID env var
+		// (falls back to the existing production pixel if unset).
+		$meta_pixel_id = getenv( 'KKS_META_PIXEL_ID' );
+		if ( ! $meta_pixel_id ) {
+			$meta_pixel_id = '5582662448427098';
+		}
 		?>
 		<!-- Meta Pixel Code -->
 		<!-- Meta Pixel Code -->
@@ -145,7 +158,7 @@ function js_hook_scripts() {
 		t.src=v;s=b.getElementsByTagName(e)[0];
 		s.parentNode.insertBefore(t,s)}(window, document,'script',
 		'https://connect.facebook.net/en_US/fbevents.js');
-		fbq('init', '5582662448427098');
+		fbq('init', '<?php echo esc_js( $meta_pixel_id ); ?>');
 		fbq('track', 'PageView');
 		</script>
 		<noscript><img height="1" width="1" style="display:none"
@@ -155,13 +168,47 @@ function js_hook_scripts() {
 		<!-- End Meta Pixel Code -->
 		<?php
 	} else {
-		// If the site URL is not 'koolkatscience.net', do nothing
-		echo '<!-- Site URL is not koolkatscience.net -->';
+		// If the site host doesn't match, do nothing
+		echo '<!-- Site host is not koolkatscience.org/.net -->';
 		return;
 	}
 }
 
 add_action( 'wp_head', 'js_hook_scripts' );
+
+// Add Givebutter donation widget script; account ID comes from the
+// KKS_GIVEBUTTER_ACCOUNT_ID env var, so it renders nothing until that's set.
+add_action(
+	'wp_enqueue_scripts',
+	function () {
+		$givebutter_account_id = getenv( 'KKS_GIVEBUTTER_ACCOUNT_ID' );
+
+		if ( ! $givebutter_account_id ) {
+			return;
+		}
+
+		wp_enqueue_script(
+			'givebutter-widget',
+			add_query_arg( 'acct', $givebutter_account_id, 'https://widgets.givebutter.com/latest.umd.cjs' ),
+			array(),
+			wp_get_theme()->get( 'Version' ),
+			false
+		);
+	}
+);
+
+// Load the Givebutter widget script asynchronously.
+add_filter(
+	'script_loader_tag',
+	function ( $tag, $handle ) {
+		if ( 'givebutter-widget' === $handle ) {
+			$tag = str_replace( ' src', ' async src', $tag );
+		}
+		return $tag;
+	},
+	10,
+	2
+);
 
 /**
  * Adjust WordPress heartbeat settings
