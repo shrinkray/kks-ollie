@@ -128,11 +128,16 @@ the_post_thumbnail( 'post-featured-full' );
 // Add Facebook Pixel to site per KKS request 3/4/2024
 
 function js_hook_scripts() {
-	// Get the site URL
-	$site_url = wp_parse_url( get_bloginfo( 'url' ), PHP_URL_HOST );
+	// Get the site host, normalized (lowercase, no leading 'www.') so
+	// 'www.koolkatscience.org' matches the same as 'koolkatscience.org'.
+	$site_host = wp_parse_url( get_bloginfo( 'url' ), PHP_URL_HOST );
+	$site_host = is_string( $site_host ) ? strtolower( $site_host ) : '';
+	if ( 0 === strpos( $site_host, 'www.' ) ) {
+		$site_host = substr( $site_host, 4 );
+	}
 
-	// Check if the site URL is 'koolkatscience.org' (or the legacy 'koolkatscience.net')
-	if ( in_array( $site_url, array( 'koolkatscience.org', 'koolkatscience.net' ), true ) ) {
+	// Check if the site host is 'koolkatscience.org' (or the legacy 'koolkatscience.net')
+	if ( in_array( $site_host, array( 'koolkatscience.org', 'koolkatscience.net' ), true ) ) {
 		// Meta Pixel account ID, configurable via the KKS_META_PIXEL_ID env var
 		// (falls back to the existing production pixel if unset).
 		$meta_pixel_id = getenv( 'KKS_META_PIXEL_ID' );
@@ -161,8 +166,8 @@ function js_hook_scripts() {
 		<!-- End Meta Pixel Code -->
 		<?php
 	} else {
-		// If the site URL doesn't match, do nothing
-		echo '<!-- Site URL is not koolkatscience.org/.net -->';
+		// If the site host doesn't match, do nothing
+		echo '<!-- Site host is not koolkatscience.org/.net -->';
 		return;
 	}
 }
