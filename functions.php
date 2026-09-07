@@ -213,16 +213,34 @@ add_filter(
 // [givebutter-widget id="WIDGET_ID"] embeds a Givebutter widget in post/page
 // content. The account is set by the enqueued script above; `id` here is the
 // specific widget's ID from the embed snippet in the Givebutter dashboard.
-add_shortcode(
-	'givebutter-widget',
-	function ( $atts ) {
-		$atts = shortcode_atts( array( 'id' => '' ), $atts, 'givebutter-widget' );
-
-		if ( empty( $atts['id'] ) ) {
-			return '';
+//
+// Registered on 'init' (not immediately) and guarded with shortcode_exists()
+// so this never silently overwrites a same-named shortcode already
+// registered by a plugin (e.g. an official Givebutter plugin) or the Ollie
+// parent theme. Plugins load, and typically register their own shortcodes
+// on 'init', before the theme's functions.php runs -- registering here on
+// 'init' too means our callback queues after theirs at the same priority,
+// so shortcode_exists() actually sees a same-priority plugin registration
+// by the time it runs, rather than always finding nothing.
+add_action(
+	'init',
+	function () {
+		if ( shortcode_exists( 'givebutter-widget' ) ) {
+			return;
 		}
 
-		return sprintf( '<givebutter-widget id="%s"></givebutter-widget>', esc_attr( $atts['id'] ) );
+		add_shortcode(
+			'givebutter-widget',
+			function ( $atts ) {
+				$atts = shortcode_atts( array( 'id' => '' ), $atts, 'givebutter-widget' );
+
+				if ( empty( $atts['id'] ) ) {
+					return '';
+				}
+
+				return sprintf( '<givebutter-widget id="%s"></givebutter-widget>', esc_attr( $atts['id'] ) );
+			}
+		);
 	}
 );
 
