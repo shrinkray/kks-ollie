@@ -234,7 +234,7 @@ add_action(
 			function ( $atts ) {
 				$atts = shortcode_atts( array( 'id' => '' ), $atts, 'givebutter-widget' );
 
-				if ( empty( $atts['id'] ) ) {
+				if ( empty( $atts['id'] ) || ! is_string( $atts['id'] ) ) {
 					return '';
 				}
 
