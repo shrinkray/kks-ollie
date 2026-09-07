@@ -59,10 +59,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Added
+### Removed
 
-- Enqueue the Givebutter donation widget script sitewide, gated on the `KKS_GIVEBUTTER_ACCOUNT_ID` environment variable (renders nothing until that's set).
-- Register a `[givebutter-widget id="WIDGET_ID"]` shortcode so a specific Givebutter widget can be embedded in post/page content. (Previously only the account script was enqueued; there was no shortcode handler, so `[givebutter-widget]` in content just printed as literal text.)
+- Theme-level Givebutter widget enqueue + `[givebutter-widget id="WIDGET_ID"]` shortcode (added earlier in this Unreleased section, now reverted). The site also runs the official "Givebutter Widgets" plugin, which registers the identical shortcode and enqueues the same `latest.umd.cjs` widget library using the Account ID configured under Settings > Givebutter Widgets in wp-admin. Plugins register shortcodes on `init` before the theme's `functions.php` runs, so the theme's `shortcode_exists()` guard always deferred to the plugin's shortcode -- but the theme's script enqueue ran unconditionally regardless, loading `latest.umd.cjs` a second time. That script calls `customElements.define('givebutter-widget', ...)`; defining the same custom element twice throws, which broke the plugin's own widget from hydrating. Donation widgets are now embedded solely via the official plugin.
 
 ### Changed
 
