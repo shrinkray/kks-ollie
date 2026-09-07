@@ -62,6 +62,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Enqueue the Givebutter donation widget script sitewide, gated on the `KKS_GIVEBUTTER_ACCOUNT_ID` environment variable (renders nothing until that's set).
+- Register a `[givebutter-widget id="WIDGET_ID"]` shortcode so a specific Givebutter widget can be embedded in post/page content. (Previously only the account script was enqueued; there was no shortcode handler, so `[givebutter-widget]` in content just printed as literal text.)
 
 ### Changed
 

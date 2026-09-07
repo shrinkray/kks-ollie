@@ -210,6 +210,22 @@ add_filter(
 	2
 );
 
+// [givebutter-widget id="WIDGET_ID"] embeds a Givebutter widget in post/page
+// content. The account is set by the enqueued script above; `id` here is the
+// specific widget's ID from the embed snippet in the Givebutter dashboard.
+add_shortcode(
+	'givebutter-widget',
+	function ( $atts ) {
+		$atts = shortcode_atts( array( 'id' => '' ), $atts, 'givebutter-widget' );
+
+		if ( empty( $atts['id'] ) ) {
+			return '';
+		}
+
+		return sprintf( '<givebutter-widget id="%s"></givebutter-widget>', esc_attr( $atts['id'] ) );
+	}
+);
+
 /**
  * Adjust WordPress heartbeat settings
  */
