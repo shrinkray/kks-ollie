@@ -59,9 +59,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Removed
+### Fixed
 
-- Theme-level Givebutter widget enqueue + `[givebutter-widget id="WIDGET_ID"]` shortcode (added earlier in this Unreleased section, now reverted). The site also runs the official "Givebutter Widgets" plugin, which registers the identical shortcode and enqueues the same `latest.umd.cjs` widget library using the Account ID configured under Settings > Givebutter Widgets in wp-admin. Plugins register shortcodes on `init` before the theme's `functions.php` runs, so the theme's `shortcode_exists()` guard always deferred to the plugin's shortcode -- but the theme's script enqueue ran unconditionally regardless, loading `latest.umd.cjs` a second time. That script calls `customElements.define('givebutter-widget', ...)`; defining the same custom element twice throws, which broke the plugin's own widget from hydrating. Donation widgets are now embedded solely via the official plugin.
+- Givebutter widget enqueue is now only registered as a fallback when the official "Givebutter Widgets" plugin's `[givebutter-widget id="WIDGET_ID"]` shortcode isn't already registered, instead of running unconditionally alongside it. The site runs that plugin, which registers the identical shortcode and enqueues the same `latest.umd.cjs` widget library itself (using the Account ID configured under Settings > Givebutter Widgets in wp-admin). Plugins register shortcodes on `init` before the theme's `functions.php` runs, so the theme's `shortcode_exists()` guard always deferred to the plugin's shortcode -- but the theme's script enqueue previously ran unconditionally regardless, loading `latest.umd.cjs` a second time. That script calls `customElements.define('givebutter-widget', ...)`; defining the same custom element twice throws, which broke the plugin's own widget from hydrating. The theme's shortcode + enqueue now both live inside the same `shortcode_exists()` guard, so they only ever run if the plugin is deactivated or removed.
 
 ### Changed
 

@@ -177,19 +177,75 @@ function js_hook_scripts() {
 add_action( 'wp_head', 'js_hook_scripts' );
 
 // Givebutter donation widgets are handled by the official "Givebutter
-// Widgets" plugin (registers its own `[givebutter-widget id="WIDGET_ID"]`
-// shortcode and enqueues widgets.givebutter.com/latest.umd.cjs using the
-// Account ID configured under Settings > Givebutter Widgets in wp-admin).
+// Widgets" plugin when it's active: it registers its own
+// `[givebutter-widget id="WIDGET_ID"]` shortcode and enqueues
+// widgets.givebutter.com/latest.umd.cjs, using the Account ID configured
+// under Settings > Givebutter Widgets in wp-admin.
 //
-// This theme previously duplicated that enqueue + shortcode here. With the
-// plugin active, that was pure redundancy -- and worse than inert: plugins
-// register their shortcodes on 'init' before the theme's functions.php
-// runs, so shortcode_exists() always found the plugin's `givebutter-widget`
-// shortcode already registered and skipped ours, while the enqueue above
-// still ran unconditionally, loading latest.umd.cjs a second time. That
-// script calls customElements.define('givebutter-widget', ...); defining
-// the same custom element twice throws, which was breaking the plugin's
-// own (correctly-loaded) copy from hydrating the widget. Removed.
+// Fall back to a theme-level implementation only when that plugin's
+// shortcode isn't registered (plugin deactivated/missing), gated by the
+// same shortcode_exists() check for both the shortcode AND the script
+// enqueue -- so this never runs a second copy of latest.umd.cjs alongside
+// the plugin's. (An earlier version of this fallback enqueued the script
+// unconditionally regardless of shortcode_exists(); loading the library
+// twice makes its customElements.define('givebutter-widget', ...) throw
+// on the second load, which broke the plugin's own widget from hydrating.)
+//
+// Registered on 'init' (not immediately): plugins register their own
+// shortcodes on 'init' before the theme's functions.php runs, so by the
+// time this callback runs, shortcode_exists() already reflects whether
+// the plugin registered 'givebutter-widget'.
+add_action(
+	'init',
+	function () {
+		if ( shortcode_exists( 'givebutter-widget' ) ) {
+			return;
+		}
+
+		$givebutter_account_id = getenv( 'KKS_GIVEBUTTER_ACCOUNT_ID' );
+
+		if ( $givebutter_account_id ) {
+			add_action(
+				'wp_enqueue_scripts',
+				function () use ( $givebutter_account_id ) {
+					wp_enqueue_script(
+						'givebutter-widget',
+						add_query_arg( 'acct', $givebutter_account_id, 'https://widgets.givebutter.com/latest.umd.cjs' ),
+						array(),
+						wp_get_theme()->get( 'Version' ),
+						false
+					);
+				}
+			);
+
+			// Load the fallback Givebutter widget script asynchronously.
+			add_filter(
+				'script_loader_tag',
+				function ( $tag, $handle ) {
+					if ( 'givebutter-widget' === $handle ) {
+						$tag = str_replace( ' src', ' async src', $tag );
+					}
+					return $tag;
+				},
+				10,
+				2
+			);
+		}
+
+		add_shortcode(
+			'givebutter-widget',
+			function ( $atts ) {
+				$atts = shortcode_atts( array( 'id' => '' ), $atts, 'givebutter-widget' );
+
+				if ( empty( $atts['id'] ) || ! is_string( $atts['id'] ) ) {
+					return '';
+				}
+
+				return sprintf( '<givebutter-widget id="%s"></givebutter-widget>', esc_attr( $atts['id'] ) );
+			}
+		);
+	}
+);
 
 /**
  * Adjust WordPress heartbeat settings
