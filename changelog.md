@@ -62,11 +62,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Enqueue the Givebutter donation widget script sitewide, gated on the `KKS_GIVEBUTTER_ACCOUNT_ID` environment variable (renders nothing until that's set).
+- Track outbound clicks to Jumbula registration links (`jumbula.com`) as Meta `Lead` events.
 
 ### Changed
 
-- Move the Meta Pixel account ID out of `functions.php` and into the `KKS_META_PIXEL_ID` environment variable, falling back to the existing production pixel ID if the env var isn't set.
-- Meta Pixel now also fires on `koolkatscience.org` (in addition to the legacy `koolkatscience.net`), since the site is publishing to the `.org` domain.
+- Move the Meta Pixel account ID out of `functions.php` and into the `KKS_META_PIXEL_ID` environment variable. If the env var is unset, the pixel and Lead tracker are not output (no hardcoded fallback).
+- Meta Pixel and Jumbula Lead tracking fire only on `koolkatscience.org`. The legacy `koolkatscience.net` domain is no longer on the allowlist.
 
 ### Fixed
 
