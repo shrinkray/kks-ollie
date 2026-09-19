@@ -138,13 +138,13 @@ function js_hook_scripts() {
 		$site_host = substr( $site_host, 4 );
 	}
 
-	// Check if the site host is 'koolkatscience.org' (or the legacy 'koolkatscience.net')
-	if ( in_array( $site_host, array( 'koolkatscience.org', 'koolkatscience.net' ), true ) ) {
-		// Meta Pixel account ID, configurable via the KKS_META_PIXEL_ID env var
-		// (falls back to the existing production pixel if unset).
+	// Check if the site host is 'koolkatscience.org'
+	if ( in_array( $site_host, array( 'koolkatscience.org' ), true ) ) {
+		// Meta Pixel account ID comes from KKS_META_PIXEL_ID (set via putenv in wp-config.php).
 		$meta_pixel_id = getenv( 'KKS_META_PIXEL_ID' );
 		if ( ! $meta_pixel_id ) {
-			$meta_pixel_id = '5582662448427098';
+			echo '<!-- KKS_META_PIXEL_ID is not set -->';
+			return;
 		}
 		?>
 		<!-- Meta Pixel Code -->
@@ -164,12 +164,50 @@ function js_hook_scripts() {
 		<noscript><img height="1" width="1" style="display:none"
 		src="www.facebook.com/…"
 		/></noscript>
-<!-- End Meta Pixel Code -->
 		<!-- End Meta Pixel Code -->
+		<!-- Meta Pixel Outbound Jumbula Click Tracker -->
+		<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			document.body.addEventListener('click', function(event) {
+				if (!(event.target instanceof Element)) {
+					return;
+				}
+
+				var targetLink = event.target.closest('a');
+
+				if (targetLink && targetLink.href && targetLink.href.indexOf('jumbula.com') !== -1) {
+					if (typeof fbq === 'function') {
+						fbq('track', 'Lead', {
+							content_name: 'Outbound Click to Jumbula',
+							destination_url: targetLink.href
+						});
+
+						// Same-tab navigations can cancel an in-flight pixel request.
+						// Modified clicks / new-tab targets are left alone.
+						if (
+							event.button === 0 &&
+							!event.metaKey &&
+							!event.ctrlKey &&
+							!event.shiftKey &&
+							!event.altKey &&
+							(!targetLink.target || targetLink.target === '_self')
+						) {
+							event.preventDefault();
+							var href = targetLink.href;
+							setTimeout(function() {
+								window.location.href = href;
+							}, 300);
+						}
+					}
+				}
+			});
+		});
+		</script>
+		<!-- End Jumbula Click Tracker -->
 		<?php
 	} else {
 		// If the site host doesn't match, do nothing
-		echo '<!-- Site host is not koolkatscience.org/.net -->';
+		echo '<!-- Site host is not koolkatscience.org -->';
 		return;
 	}
 }
