@@ -169,15 +169,34 @@ function js_hook_scripts() {
 		<script>
 		document.addEventListener('DOMContentLoaded', function() {
 			document.body.addEventListener('click', function(event) {
+				if (!(event.target instanceof Element)) {
+					return;
+				}
+
 				var targetLink = event.target.closest('a');
 
-				if (targetLink && targetLink.href) {
-					if (targetLink.href.indexOf('jumbula.com') !== -1) {
-						if (typeof fbq === 'function') {
-							fbq('track', 'Lead', {
-								content_name: 'Outbound Click to Jumbula',
-								destination_url: targetLink.href
-							});
+				if (targetLink && targetLink.href && targetLink.href.indexOf('jumbula.com') !== -1) {
+					if (typeof fbq === 'function') {
+						fbq('track', 'Lead', {
+							content_name: 'Outbound Click to Jumbula',
+							destination_url: targetLink.href
+						});
+
+						// Same-tab navigations can cancel an in-flight pixel request.
+						// Modified clicks / new-tab targets are left alone.
+						if (
+							event.button === 0 &&
+							!event.metaKey &&
+							!event.ctrlKey &&
+							!event.shiftKey &&
+							!event.altKey &&
+							(!targetLink.target || targetLink.target === '_self')
+						) {
+							event.preventDefault();
+							var href = targetLink.href;
+							setTimeout(function() {
+								window.location.href = href;
+							}, 300);
 						}
 					}
 				}
